@@ -73,7 +73,7 @@ const Skills = () => {
       </Typography>
       <Grid container spacing={{ xs: 2, sm: 4 }}>
         {skillCategories.map((category, categoryIndex) => (
-          <Grid item xs={12} md={6} key={categoryIndex}>
+          <Grid item xs={12} md={6} xl={3} key={categoryIndex}>
             <Paper
               component={motion.div}
               initial={{ opacity: 0, y: 20 }}
