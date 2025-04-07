@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Button, Box, IconButton, Menu, MenuItem } from '@mui/material';
 import { motion } from 'framer-motion';
 import MenuIcon from '@mui/icons-material/Menu';
+// import resumeLogoTrans from '../assets/images/logo_transparent.png';
+import resumeLogoNavBar from '../assets/images/logo_navbar_ready.png';
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -33,22 +35,27 @@ const Header = () => {
   }, [scrollTarget]);
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
-      <Toolbar>
-        <Typography
-          variant="h6"
-          component={motion.div}
-          // whileHover={{ scale: 1.05 }}
-          sx={{ 
-            flexGrow: 1, 
-            fontWeight: 700, 
-            color: 'primary.main',
-            fontSize: { xs: '1.2rem', sm: '1.5rem' }
+    <AppBar 
+      position="sticky" 
+      sx={{ backgroundColor: 'transparent', boxShadow: 'none', 
+    }}>
+      <Toolbar
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+        }}
+      >
+        <Box
+          component="img"
+          src={resumeLogoNavBar}
+          alt="Resume Logo"
+          sx={{
+            width: { xs: '120px', sm: '150px' },
+            height: 'auto',
           }}
           onClick={() => handleScroll('About')}
-        >
-          Hariom Sharma
-        </Typography>
+        />
         
         {/* Desktop Navigation */}
         <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2 }}>

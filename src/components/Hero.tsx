@@ -8,7 +8,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import SpeedIcon from '@mui/icons-material/Speed';
 import SecurityIcon from '@mui/icons-material/Security';
 // import resumeLogo from '../assets/images/resume_logo.png';
-import resumeLogoTrans from '../assets/images/logo_transparent.png';
+// import resumeLogoTrans from '../assets/images/logo_transparent.png';
 
 const Hero = () => {
   const [ref, inView] = useInView({
@@ -74,16 +74,6 @@ const Hero = () => {
                 mb: { xs: 2, sm: 3 },
               }}
             >
-              <Box
-                component="img"
-                src={resumeLogoTrans}
-                alt="Resume Logo"
-                sx={{
-                  width: { xs: '120px', sm: '150px' },
-                  height: 'auto',
-                  mb: 2,
-                }}
-              />
               <Typography
                 variant="h1"
                 component={motion.h1}
