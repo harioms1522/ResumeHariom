@@ -58,7 +58,7 @@ const Hero = () => {
     >
       <Container maxWidth="lg">
         <Grid container spacing={{ xs: 4, sm: 6 }} alignItems="center">
-          <Grid item xs={12} md={6}>
+          <Grid container component="div">
             <Typography
               variant="h1"
               component={motion.h1}
@@ -91,7 +91,7 @@ const Hero = () => {
               Building scalable systems and cloud infrastructure for modern applications
             </Typography>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid container component="div">
             <Box
               component={motion.div}
               initial={{ opacity: 0, x: 20 }}
