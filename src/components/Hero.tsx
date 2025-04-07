@@ -18,27 +18,27 @@ const Hero = () => {
 
   const summaryPoints = [
     {
-      icon: <CodeIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'primary.main' }} />,
+      icon: <CodeIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'white' }} />,
       text: "Results-driven Backend Engineer and Cloud Infrastructure Specialist with hands-on experience in designing, building, and managing scalable backend systems and cloud infrastructure for e-commerce and social commerce platforms."
     },
     {
-      icon: <SettingsIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'primary.main' }} />,
+      icon: <SettingsIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'white' }} />,
       text: "Experienced in end-to-end ownership of Order Management Systems (OMS), CRM, Warehouse Management System (WMS) integrations, and backend architecture."
     },
     {
-      icon: <StorageIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'primary.main' }} />,
+      icon: <StorageIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'white' }} />,
       text: "Proven expertise in backend development using Node.js, Python, and SQL/NoSQL databases like MongoDB, MySQL, and Redshift."
     },
     {
-      icon: <CloudIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'primary.main' }} />,
+      icon: <CloudIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'white' }} />,
       text: "Skilled in AWS Cloud ecosystem with strong exposure to AWS Glue, AWS DMS, Redshift DB, EKS, ECS, and Terraform for infrastructure automation."
     },
     {
-      icon: <SpeedIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'primary.main' }} />,
+      icon: <SpeedIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'white' }} />,
       text: "Experienced in ETL development, data pipeline management, and collaboration with BI teams for data-driven solutions."
     },
     {
-      icon: <SecurityIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'primary.main' }} />,
+      icon: <SecurityIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'white' }} />,
       text: "Proficient in Docker, Docker Compose, and Kubernetes for containerization and orchestration of microservices-based architecture."
     }
   ];
@@ -130,7 +130,7 @@ const Hero = () => {
                     display: 'flex',
                     alignItems: 'flex-start',
                     gap: { xs: 2, sm: 3 },
-                    backgroundColor: 'background.paper',
+                    // backgroundColor: 'background.paper',
                     borderRadius: 2,
                     boxShadow: 1,
                     '&:hover': {
@@ -147,9 +147,7 @@ const Hero = () => {
                       justifyContent: 'center',
                       minWidth: { xs: 40, sm: 48 },
                       height: { xs: 40, sm: 48 },
-                      borderRadius: 1,
-                      backgroundColor: 'primary.light',
-                      opacity: 0.1,
+                      borderRadius: 1
                     }}
                   >
                     {point.icon}
