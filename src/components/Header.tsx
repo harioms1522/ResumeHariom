@@ -48,8 +48,7 @@ const Header = () => {
   return (
     <AppBar 
       position="sticky" 
-      sx={{ backgroundColor: 'transparent', boxShadow: 'none', 
-    }}>
+      sx={{ boxShadow: 'none' }}>
       <Toolbar
         sx={{
           display: 'flex',

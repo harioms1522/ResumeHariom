@@ -5,10 +5,12 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import DownloadIcon from '@mui/icons-material/Download';
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 import resume from '../assets/Resume.pdf'
 
 const Contact = () => {
+  const [formSubmitted, setFormSubmitted] = useState(false)
+
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -20,12 +22,22 @@ const Contact = () => {
     severity: 'success' as 'success' | 'error'
   });
 
+  useEffect(() => {
+    if (formSubmitted) {
+      const element = document.getElementById("about");
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+      setFormSubmitted(false);
+    }
+  }, [formSubmitted]);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     
     try {
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const response = await fetch('https://formspree.io/f/mzzekjyo', {
         method: 'POST',
         body: formData,
         headers: {
@@ -40,6 +52,7 @@ const Contact = () => {
           severity: 'success'
         });
         (e.target as HTMLFormElement).reset();
+        setFormSubmitted(true);
       } else {
         throw new Error('Failed to send message');
       }
