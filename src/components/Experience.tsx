@@ -4,25 +4,34 @@ import { useInView } from 'react-intersection-observer';
 
 const experiences = [
   {
-    title: 'Lead Backend Engineer',
-    company: 'Tech Solutions Inc.',
-    period: '2020 - Present',
-    description: 'Leading a team of backend developers in designing and implementing scalable microservices architecture. Spearheading the migration to cloud-native infrastructure and implementing CI/CD pipelines.',
-    technologies: ['Node.js', 'Python', 'AWS', 'Docker', 'Kubernetes', 'MongoDB'],
+    title: 'Software Engineer',
+    company: 'Zeno Health',
+    period: 'Feb 2024 - Present',
+    description: `As the owner of the order processing pipelines, CRM, and servers, I have been working on the company's e-commerce and social commerce division. I have been working closely with the BI team to support the ETL using AWS Redshift, DMS, and Glue. I have also been in charge of backend architecture and server management. I have overseen numerous significant projects involving the conversion of backend architecture to AWS and the integration of warehouse management systems, among other things`,
+    technologies: ['Node.js', 'MongoDB', 'MySQL', 'Python', 'Python Data Pipeline', 'NoSQL', 'Backend', 'React.js', 'AWS', 'AWS Glue', 'Warehouse Management System', 'CRM', 'Redshift DB', 'Docker', 'Docker Compose', 'Kubernetes', 'Terraform', 'EKS', 'EC2', 'ETL Development', 'Order Management System', 'MongoDB DBA', 'AWS Cloud', 'AWS DMS'],
   },
   {
-    title: 'Senior Backend Engineer',
-    company: 'Digital Innovations Ltd',
-    period: '2018 - 2020',
-    description: 'Developed and maintained high-performance REST APIs and microservices. Implemented robust authentication and authorization systems.',
-    technologies: ['Java', 'Spring Boot', 'PostgreSQL', 'Redis', 'RabbitMQ'],
+    title: 'Software Engineer',
+    company: 'Tablt Pharmacy',
+    period: 'June 2023 - Feb 2024',
+    description: `Managed and developed the CRM and order processing pipelines. Worked closely with the product to design several processes like the return etc.`,
+    technologies: ['Node.js', 'Python', 'AWS', 'Docker', 'MongoDB', 'Docker', 'Docker Compose', 'Kubernetes', 'Warehouse Management System', 'Order Management System', 'CRM', 'MySQL', 'Python Data Pipeline', 'Python Data Analysis'],
   },
   {
     title: 'Backend Engineer',
-    company: 'Web Solutions Co',
-    period: '2016 - 2018',
-    description: 'Built and optimized database schemas, implemented caching strategies, and developed API endpoints for various client applications.',
-    technologies: ['Python', 'Django', 'MySQL', 'Elasticsearch', 'Nginx'],
+    company: 'Tablt Pharmacy',
+    period: 'June 2022 - June 2023',
+    description: `Developed and maintained web applications using Node, ensuring scalability, reliability, and 
+performance.`,
+    technologies: ['Node.js', 'MongoDB', 'Express', 'jQuery', 'Bootstrap', 'Linux'],
+  },
+  {
+    title: 'Process Analyst (Automation)',
+    company: 'Ruptok Fintech Pvt Ltd',
+    period: 'June 2021 – June 2022',
+    description: `Leveraged Node.js and MySQL to seamlessly integrate LSQ with the organization's internal Lead
+ Management System (LMS), enabling streamlined management of all opportunities and leads.`,
+    technologies: ['Tableau', 'MySQL', 'Python', 'Node.js'],
   },
 ];
 
