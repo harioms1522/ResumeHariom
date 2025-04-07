@@ -227,7 +227,7 @@ const Contact = () => {
                 }}
               >
                 <Link
-                  href="https://github.com/yourusername"
+                  href="https://github.com/harioms1522"
                   target="_blank"
                   rel="noopener noreferrer"
                   sx={{ textDecoration: 'none' }}
@@ -248,7 +248,7 @@ const Contact = () => {
                   </IconButton>
                 </Link>
                 <Link
-                  href="https://linkedin.com/in/yourusername"
+                  href="https://linkedin.com/in/harioms152"
                   target="_blank"
                   rel="noopener noreferrer"
                   sx={{ textDecoration: 'none' }}
@@ -269,7 +269,7 @@ const Contact = () => {
                   </IconButton>
                 </Link>
                 <Link
-                  href="mailto:your.email@example.com"
+                  href="mailto:harioms1522@gmail.com"
                   sx={{ textDecoration: 'none' }}
                 >
                   <IconButton
