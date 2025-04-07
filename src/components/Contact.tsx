@@ -4,7 +4,9 @@ import { useInView } from 'react-intersection-observer';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
+import DownloadIcon from '@mui/icons-material/Download';
 import { useState, FormEvent } from 'react';
+import resume from '../assets/Resume.pdf'
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -52,6 +54,15 @@ const Contact = () => {
 
   const handleCloseSnackbar = () => {
     setSnackbar(prev => ({ ...prev, open: false }));
+  };
+
+  const handleDownloadResume = () => {
+    const link = document.createElement('a');
+    link.href = resume;
+    link.download = 'resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -288,6 +299,28 @@ const Contact = () => {
                   </IconButton>
                 </Link>
               </Box>
+
+              {/* Download Resume Button */}
+              <Button
+                variant="outlined"
+                startIcon={<DownloadIcon />}
+                onClick={handleDownloadResume}
+                component={motion.button}
+                whileHover={{ scale: 1.05 }}
+                sx={{
+                  mt: { xs: 2, sm: 3 },
+                  borderRadius: 2,
+                  py: 1.5,
+                  px: 3,
+                  fontSize: { xs: '0.9rem', sm: '1rem' },
+                  borderWidth: 2,
+                  '&:hover': {
+                    borderWidth: 2,
+                  },
+                }}
+              >
+                Download Resume
+              </Button>
             </Box>
           </Grid>
         </Grid>

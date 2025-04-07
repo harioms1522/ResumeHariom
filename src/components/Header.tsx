@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { AppBar, Toolbar, Typography, Button, Box, IconButton, Menu, MenuItem } from '@mui/material';
+import { AppBar, Toolbar, Button, Box, IconButton, Menu, MenuItem } from '@mui/material';
 import { motion } from 'framer-motion';
 import MenuIcon from '@mui/icons-material/Menu';
+import DownloadIcon from '@mui/icons-material/Download';
 // import resumeLogoTrans from '../assets/images/logo_transparent.png';
 import resumeLogoNavBar from '../assets/images/logo_navbar_ready.png';
+import resume from '../assets/Resume.pdf';
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -22,6 +24,15 @@ const Header = () => {
   const handleScroll = (section: string) => {
     setScrollTarget(section.toLowerCase());
     handleClose();
+  };
+
+  const handleDownloadResume = () => {
+    const link = document.createElement('a');
+    link.href = resume;
+    link.download = 'resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   useEffect(() => {
@@ -58,7 +69,7 @@ const Header = () => {
         />
         
         {/* Desktop Navigation */}
-        <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2 }}>
+        <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2, alignItems: 'center' }}>
           {navItems.map((item) => (
             <Button
               key={item}
@@ -76,6 +87,23 @@ const Header = () => {
               {item}
             </Button>
           ))}
+          <Button
+            variant="outlined"
+            startIcon={<DownloadIcon />}
+            onClick={handleDownloadResume}
+            component={motion.button}
+            whileHover={{ scale: 1.05 }}
+            sx={{
+              ml: 2,
+              borderRadius: 2,
+              borderWidth: 2,
+              '&:hover': {
+                borderWidth: 2,
+              },
+            }}
+          >
+            Resume
+          </Button>
         </Box>
 
         {/* Mobile Navigation */}
@@ -121,6 +149,17 @@ const Header = () => {
                 {item}
               </MenuItem>
             ))}
+            <MenuItem
+              onClick={handleDownloadResume}
+              sx={{
+                fontSize: '1rem',
+                '&:hover': {
+                  color: 'primary.main',
+                },
+              }}
+            >
+              <DownloadIcon sx={{ mr: 1 }} /> Resume
+            </MenuItem>
           </Menu>
         </Box>
       </Toolbar>
