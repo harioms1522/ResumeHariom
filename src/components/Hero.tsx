@@ -87,7 +87,7 @@ const Hero = () => {
                   lineHeight: 1.2,
                 }}
               >
-                Backend Engineer & Cloud Specialist
+                Backend and Cloud Engineer
               </Typography>
               <Typography
                 variant="h5"
