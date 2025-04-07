@@ -94,7 +94,7 @@ const Contact = () => {
       >
         <Grid container spacing={{ xs: 4, sm: 6 }} alignItems="center">
           {/* Form Column */}
-          <Grid container component="div">
+          <Grid item xs={12} md={7}>
             <Typography
               variant="h5"
               sx={{ 
@@ -173,7 +173,7 @@ const Contact = () => {
           </Grid>
 
           {/* Social Links Column */}
-          <Grid container component="div">
+          <Grid item xs={12} md={5}>
             <Box
               sx={{
                 display: 'flex',

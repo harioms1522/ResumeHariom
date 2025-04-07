@@ -58,7 +58,7 @@ const Experience = () => {
       </Typography>
       <Grid container spacing={{ xs: 2, sm: 4 }}>
         {experiences.map((exp, index) => (
-          <Grid container component="div" key={index}>
+          <Grid item xs={12} key={index}>
             <Paper
               component={motion.div}
               initial={{ opacity: 0, x: -20 }}
