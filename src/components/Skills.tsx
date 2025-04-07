@@ -8,17 +8,26 @@ const skillCategories = [
     skills: [
       { name: 'Node.js', level: 95 },
       { name: 'Python', level: 90 },
-      { name: 'Java', level: 85 },
-      { name: 'Go', level: 80 },
+      { name: 'Express', level: 90 },
+      { name: 'Golang', level: 40 },
+    ],
+  },
+  {
+    title: 'Frontend Development',
+    skills: [
+      { name: 'React.js', level: 90 },
+      // { name: 'Next.js', level: 40 },
+      { name: 'Tailwind CSS', level: 50 },
+      { name: 'Bootstrap', level: 50 },
+      { name: 'jQuery', level: 80 },
     ],
   },
   {
     title: 'Databases',
     skills: [
-      { name: 'PostgreSQL', level: 95 },
-      { name: 'MongoDB', level: 90 },
-      { name: 'Redis', level: 85 },
-      { name: 'Elasticsearch', level: 80 },
+      { name: 'MongoDB', level: 95 },
+      { name: 'MongoDB DBA', level: 95 },
+      { name: 'MySQL', level: 90 },
     ],
   },
   {
@@ -28,6 +37,16 @@ const skillCategories = [
       { name: 'Docker', level: 95 },
       { name: 'Kubernetes', level: 85 },
       { name: 'CI/CD', level: 90 },
+      { name: 'Terraform', level: 50 },
+    ],
+  },
+  {
+    title: 'Data Engineering',
+    skills: [
+      { name: 'ETL', level: 90 },
+      { name: 'AWS DMS', level: 75 },
+      { name: 'AWS Glue', level: 75 },
+      { name: 'AWS Redshift', level: 75 }
     ],
   },
   {
