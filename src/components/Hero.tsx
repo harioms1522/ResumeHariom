@@ -7,6 +7,8 @@ import StorageIcon from '@mui/icons-material/Storage';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SpeedIcon from '@mui/icons-material/Speed';
 import SecurityIcon from '@mui/icons-material/Security';
+// import resumeLogo from '../assets/images/resume_logo.png';
+import resumeLogoTrans from '../assets/images/logo_transparent.png';
 
 const Hero = () => {
   const [ref, inView] = useInView({
@@ -60,37 +62,59 @@ const Hero = () => {
       <Container maxWidth="lg">
         <Grid container spacing={{ xs: 4, sm: 6 }} alignItems="center">
           <Grid item xs={12} md={6}>
-            <Typography
-              variant="h1"
-              component={motion.h1}
+            <Box
+              component={motion.div}
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2 }}
               sx={{
-                fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem' },
-                fontWeight: 'bold',
-                color: 'primary.main',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
                 mb: { xs: 2, sm: 3 },
-                lineHeight: 1.2,
               }}
             >
-              Backend Engineer & Cloud Specialist
-            </Typography>
-            <Typography
-              variant="h5"
-              component={motion.h5}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.4 }}
-              sx={{
-                color: 'text.secondary',
-                mb: { xs: 3, sm: 4 },
-                fontSize: { xs: '1.2rem', sm: '1.5rem' },
-                lineHeight: 1.5,
-              }}
-            >
-              Building scalable systems and cloud infrastructure for modern applications
-            </Typography>
+              <Box
+                component="img"
+                src={resumeLogoTrans}
+                alt="Resume Logo"
+                sx={{
+                  width: { xs: '120px', sm: '150px' },
+                  height: 'auto',
+                  mb: 2,
+                }}
+              />
+              <Typography
+                variant="h1"
+                component={motion.h1}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.2 }}
+                sx={{
+                  fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem' },
+                  fontWeight: 'bold',
+                  color: 'primary.main',
+                  lineHeight: 1.2,
+                }}
+              >
+                Backend Engineer & Cloud Specialist
+              </Typography>
+              <Typography
+                variant="h5"
+                component={motion.h5}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.4 }}
+                sx={{
+                  color: 'text.secondary',
+                  mb: { xs: 3, sm: 4 },
+                  fontSize: { xs: '1.2rem', sm: '1.5rem' },
+                  lineHeight: 1.5,
+                }}
+              >
+                Building scalable systems and cloud infrastructure for modern applications
+              </Typography>
+            </Box>
           </Grid>
           <Grid item xs={12} md={6}>
             <Box
