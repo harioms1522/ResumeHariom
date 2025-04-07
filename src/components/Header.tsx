@@ -6,7 +6,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [scrollTarget, setScrollTarget] = useState<string | null>(null);
-  const navItems = ['About', 'Experience', 'Skills', 'Projects', 'Contact'];
+  // const navItems = ['About', 'Experience', 'Skills', 'Projects', 'Contact'];
+  const navItems = ['About', 'Experience', 'Skills', 'Contact'];
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

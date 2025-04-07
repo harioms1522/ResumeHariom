@@ -43,7 +43,7 @@ function App() {
           <Hero />
           <Experience />
           <Skills />
-          <Projects />
+          {/* <Projects /> */}
           <Contact />
         </Container>
       </Box>
