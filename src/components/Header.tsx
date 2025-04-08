@@ -3,9 +3,15 @@ import { AppBar, Toolbar, Button, Box, IconButton, Menu, MenuItem } from '@mui/m
 import { motion } from 'framer-motion';
 import MenuIcon from '@mui/icons-material/Menu';
 import DownloadIcon from '@mui/icons-material/Download';
+// icon for blog button
+import BlogIcon from '@mui/icons-material/Article';
+
+import { Link } from 'react-router-dom';
+
 // import resumeLogoTrans from '../assets/images/logo_transparent.png';
 import resumeLogoNavBar from '../assets/images/logo_navbar_ready.png';
 import resume from '../assets/Resume.pdf';
+
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -46,8 +52,8 @@ const Header = () => {
   }, [scrollTarget]);
 
   return (
-    <AppBar 
-      position="sticky" 
+    <AppBar
+      position="sticky"
       sx={{ boxShadow: 'none' }}>
       <Toolbar
         sx={{
@@ -66,7 +72,6 @@ const Header = () => {
           }}
           onClick={() => handleScroll('About')}
         />
-        
         {/* Desktop Navigation */}
         <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2, alignItems: 'center' }}>
           {navItems.map((item) => (
@@ -86,6 +91,23 @@ const Header = () => {
               {item}
             </Button>
           ))}
+          <Button
+            variant="outlined"
+            startIcon={<BlogIcon />}
+            component={motion.button}
+            whileHover={{ scale: 1.05 }}
+            sx={{
+              borderRadius: 2,
+              borderWidth: 2,
+              '&:hover': {
+                borderWidth: 2,
+              },
+            }}
+          >
+            <Link to={'/blog'} style={{ textDecoration: 'none', color: 'inherit' }}>
+              Blog
+            </Link>
+          </Button>
           <Button
             variant="outlined"
             startIcon={<DownloadIcon />}
@@ -148,6 +170,19 @@ const Header = () => {
                 {item}
               </MenuItem>
             ))}
+            <MenuItem
+              sx={{
+                fontSize: '1rem',
+                '&:hover': {
+                  color: 'primary.main',
+                },
+              }}
+            >
+              <Link to={'/blog'} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <BlogIcon sx={{ mr: 1 }} />
+                Blog
+              </Link>
+            </MenuItem>
             <MenuItem
               onClick={handleDownloadResume}
               sx={{
