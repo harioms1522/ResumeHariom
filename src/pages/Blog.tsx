@@ -74,16 +74,18 @@ const Blog = () => {
                     initial={{ opacity: 0 }}
                     animate={inView ? { opacity: 1 } : {}}
                     transition={{ duration: 0.8 }}
-                    // sx={{ py: { xs: 4, sm: 8 } }}
-                    id="experience"
+                    sx={{ px: 4, display: 'flex', flexDirection: 'column', gap: 2 }}
                 >
-                    <List sx={{ width: '100', bgcolor: 'background.paper', borderRadius: 2 }}>
+                    <List sx={{ width: '100', borderRadius: 2 }}>
                         {blogs.map((blog) => (
-                            <ListItemButton sx={{ borderRadius: 2 }} component={Link} to={`/blog/${blog.slug}`} key={blog.id}>
+                            <ListItemButton sx={{ borderRadius: 2, margin:2 }} component={Link} to={`/blog/${blog.slug}`} key={blog.id}>
                                 <ListItemText 
-                                    primary={blog.title} 
                                     secondary={`By ${blog.author} on ${new Date(blog.date).toLocaleDateString()}`
-                                } />
+                                }>
+                                    <Typography variant="h4" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+                                        {blog.title}
+                                    </Typography>
+                                </ListItemText>
                             </ListItemButton>
                         ))}
                     </List>

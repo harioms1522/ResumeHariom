@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Button, Box, IconButton, Menu, MenuItem } from '@mui/material';
 import { motion } from 'framer-motion';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -14,6 +15,7 @@ import resume from '../assets/Resume.pdf';
 
 
 const Header = () => {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [scrollTarget, setScrollTarget] = useState<string | null>(null);
   // const navItems = ['About', 'Experience', 'Skills', 'Projects', 'Contact'];
@@ -70,7 +72,7 @@ const Header = () => {
             width: { xs: '120px', sm: '150px' },
             height: 'auto',
           }}
-          onClick={() => handleScroll('About')}
+          onClick={() => { navigate('/') }} // Navigate to home page on logo click
         />
         {/* Desktop Navigation */}
         <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2, alignItems: 'center' }}>
@@ -91,23 +93,23 @@ const Header = () => {
               {item}
             </Button>
           ))}
-          <Button
-            variant="outlined"
-            startIcon={<BlogIcon />}
-            component={motion.button}
-            whileHover={{ scale: 1.05 }}
-            sx={{
-              borderRadius: 2,
-              borderWidth: 2,
-              '&:hover': {
+          <Link to={'/blog'} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Button
+              variant="outlined"
+              startIcon={<BlogIcon />}
+              component={motion.button}
+              whileHover={{ scale: 1.05 }}
+              sx={{
+                borderRadius: 2,
                 borderWidth: 2,
-              },
-            }}
-          >
-            <Link to={'/blog'} style={{ textDecoration: 'none', color: 'inherit' }}>
+                '&:hover': {
+                  borderWidth: 2,
+                },
+              }}
+            >
               Blog
-            </Link>
-          </Button>
+            </Button>
+          </Link>
           <Button
             variant="outlined"
             startIcon={<DownloadIcon />}
