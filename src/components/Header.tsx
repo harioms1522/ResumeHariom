@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Button, Box, IconButton, Menu, MenuItem } from '@mui/material';
 import { motion } from 'framer-motion';
@@ -6,6 +6,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import DownloadIcon from '@mui/icons-material/Download';
 // icon for blog button
 import BlogIcon from '@mui/icons-material/Article';
+
+import { ThemeContext } from '../context/ThemeContext';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 import { Link } from 'react-router-dom';
 
@@ -16,6 +20,8 @@ import resume from '../assets/Resume.pdf';
 
 const Header = () => {
   const navigate = useNavigate();
+  const themeCtx = useContext(ThemeContext) as { themeMode: 'light' | 'dark'; toggleTheme: () => void };
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [scrollTarget, setScrollTarget] = useState<string | null>(null);
   // const navItems = ['About', 'Experience', 'Skills', 'Projects', 'Contact'];
@@ -126,6 +132,17 @@ const Header = () => {
             }}
           >
             Resume
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={themeCtx.toggleTheme}
+            component={motion.button}
+          >
+            {themeCtx.themeMode === 'dark' ? (
+              <LightModeIcon sx={{ color: 'text.primary' }} />
+            ) : (
+              <DarkModeIcon sx={{ color: 'text.primary' }} />
+            )}
           </Button>
         </Box>
 
