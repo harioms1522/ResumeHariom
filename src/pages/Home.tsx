@@ -5,6 +5,8 @@ import Skills from "../components/Skills"
 import Contact from "../components/Contact"
 // import Projects from "../components/Projects"
 import { Helmet } from "react-helmet-async"
+import { Box } from "@mui/system"
+import { motion } from "framer-motion"
 
 const Home = () => {
     return (
@@ -26,11 +28,19 @@ const Home = () => {
                 <meta property="og:locale" content="en_US" />
             </Helmet>
             <Container maxWidth="lg" sx={{ py: 4 }}>
-                <Hero />
-                <Experience />
-                <Skills />
-                {/* <Projects /> */}
-                <Contact />
+                <Box
+                    component={motion.div} 
+                    initial={{ opacity: 0 }} 
+                    animate={{ opacity: 1 }} 
+                    exit={{ opacity: 0 }} 
+                    transition={{ duration: 0.5 }}
+                >
+                    <Hero />
+                    <Experience />
+                    <Skills />
+                    {/* <Projects /> */}
+                    <Contact />
+                </Box>
             </Container>
         </>
     )
