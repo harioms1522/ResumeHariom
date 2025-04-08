@@ -18,27 +18,27 @@ const Hero = () => {
 
   const summaryPoints = [
     {
-      icon: <CodeIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'white' }} />,
+      icon: <CodeIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'secondary.main' }} />,
       text: "Results-driven Backend Engineer and Cloud Infrastructure Specialist with hands-on experience in designing, building, and managing scalable backend systems and cloud infrastructure for e-commerce and social commerce platforms."
     },
     {
-      icon: <SettingsIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'white' }} />,
+      icon: <SettingsIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'secondary.main' }} />,
       text: "Experienced in end-to-end ownership of Order Management Systems (OMS), CRM, Warehouse Management System (WMS) integrations, and backend architecture."
     },
     {
-      icon: <StorageIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'white' }} />,
+      icon: <StorageIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'secondary.main' }} />,
       text: "Proven expertise in backend development using Node.js, Python, and SQL/NoSQL databases like MongoDB, MySQL, and Redshift."
     },
     {
-      icon: <CloudIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'white' }} />,
+      icon: <CloudIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'secondary.main' }} />,
       text: "Skilled in AWS Cloud ecosystem with strong exposure to AWS Glue, AWS DMS, Redshift DB, EKS, ECS, and Terraform for infrastructure automation."
     },
     {
-      icon: <SpeedIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'white' }} />,
+      icon: <SpeedIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'secondary.main' }} />,
       text: "Experienced in ETL development, data pipeline management, and collaboration with BI teams for data-driven solutions."
     },
     {
-      icon: <SecurityIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'white' }} />,
+      icon: <SecurityIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'secondary.main' }} />,
       text: "Proficient in Docker, Docker Compose, and Kubernetes for containerization and orchestration of microservices-based architecture."
     }
   ];
