@@ -105,6 +105,7 @@ const Header = () => {
               startIcon={<BlogIcon />}
               component={motion.button}
               whileHover={{ scale: 1.05 }}
+              color="inherit"
               sx={{
                 borderRadius: 2,
                 borderWidth: 2,
@@ -122,6 +123,7 @@ const Header = () => {
             onClick={handleDownloadResume}
             component={motion.button}
             whileHover={{ scale: 1.05 }}
+            color="inherit"
             sx={{
               ml: 2,
               borderRadius: 2,
@@ -137,11 +139,12 @@ const Header = () => {
             variant="outlined"
             onClick={themeCtx.toggleTheme}
             component={motion.button}
+            color="inherit"
           >
             {themeCtx.themeMode === 'dark' ? (
-              <LightModeIcon sx={{ color: 'text.primary' }} />
+              <LightModeIcon  color='inherit' />
             ) : (
-              <DarkModeIcon sx={{ color: 'text.primary' }} />
+              <DarkModeIcon color='inherit' />
             )}
           </Button>
         </Box>
