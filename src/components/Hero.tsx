@@ -87,7 +87,7 @@ const Hero = () => {
                   lineHeight: 1.2,
                 }}
               >
-                Backend and Cloud Engineer
+                Full Stack Engineer
               </Typography>
               <Typography
                 variant="h5"
@@ -102,7 +102,7 @@ const Hero = () => {
                   lineHeight: 1.5,
                 }}
               >
-                Building scalable systems and cloud infrastructure for modern applications
+                Crafting innovative solutions as a Full Stack Engineer, specializing in backend systems, cloud infrastructure, and scalable architectures to empower modern applications.
               </Typography>
             </Box>
           </Grid>
