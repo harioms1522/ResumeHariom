@@ -34,12 +34,8 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #64ffda;
+  background: #646cff;
   border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #ff64da;
 }
 
 a {
