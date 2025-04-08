@@ -142,7 +142,7 @@ const Header = () => {
             color="inherit"
           >
             {themeCtx.themeMode === 'dark' ? (
-              <LightModeIcon  color='inherit' />
+              <LightModeIcon color='inherit' />
             ) : (
               <DarkModeIcon color='inherit' />
             )}
@@ -215,6 +215,21 @@ const Header = () => {
               }}
             >
               <DownloadIcon sx={{ mr: 1 }} /> Resume
+            </MenuItem>
+            <MenuItem
+              onClick={themeCtx.toggleTheme}
+              sx={{
+                fontSize: '1rem',
+                '&:hover': {
+                  color: 'primary.main',
+                },
+              }}
+            >
+              {themeCtx.themeMode === 'dark' ? (
+                <LightModeIcon color='inherit' sx={{ mr: 1 }} />
+              ) : (
+                <DarkModeIcon color='inherit' sx={{ mr: 1 }} />
+              )} Mode
             </MenuItem>
           </Menu>
         </Box>
