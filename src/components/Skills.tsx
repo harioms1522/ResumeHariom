@@ -10,6 +10,8 @@ const skillCategories = [
       { name: 'Python', level: 90 },
       { name: 'Express', level: 90 },
       { name: 'Golang', level: 40 },
+      { name: 'API Design', level: 95 },
+      { name: 'System Design', level: 90 },
     ],
   },
   {
@@ -28,6 +30,7 @@ const skillCategories = [
       { name: 'MongoDB', level: 95 },
       { name: 'MongoDB DBA', level: 95 },
       { name: 'MySQL', level: 90 },
+      { name: 'AWS Redshift', level: 75 }
     ],
   },
   {
@@ -38,26 +41,23 @@ const skillCategories = [
       { name: 'Kubernetes', level: 85 },
       { name: 'CI/CD', level: 90 },
       { name: 'Terraform', level: 50 },
-    ],
-  },
-  {
-    title: 'Data Engineering',
-    skills: [
       { name: 'ETL', level: 90 },
       { name: 'AWS DMS', level: 75 },
       { name: 'AWS Glue', level: 75 },
-      { name: 'AWS Redshift', level: 75 }
-    ],
-  },
-  {
-    title: 'Architecture & Design',
-    skills: [
       { name: 'Microservices', level: 95 },
-      { name: 'System Design', level: 90 },
-      { name: 'API Design', level: 95 },
       { name: 'Security', level: 85 },
     ],
   },
+  // {
+  //   title: 'Data Engineering',
+  //   skills: [
+  //   ],
+  // },
+  // {
+  //   title: 'Architecture & Design',
+  //   skills: [
+  //   ],
+  // },
 ];
 
 const Skills = () => {
