@@ -38,7 +38,7 @@ const Home = () => {
                     <Hero />
                     <Experience />
                     <Skills />
-                    <Projects />
+                    {/* <Projects /> */}
                     <Contact />
                 </Box>
             </Container>
