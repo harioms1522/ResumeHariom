@@ -1,11 +1,12 @@
 import { Button, Typography, Avatar, Box } from '@mui/material';
+import CodeBlock from '../../../components/CodeBlock';
 
 <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-between', padding: 2}}>
-    # {props.title}
+    # Understanding React Router
     <Box sx={{padding: 2, alignItems: 'center'}}>
         <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-between', gap: 2}}>
             <Avatar alt="Hariom Sharma" src="/static/images/avatar/1.jpg" />
-            <Typography variant="h6">{props.author}</Typography>
+            <Typography variant="h6">Hariom Sharma</Typography>
         </Box>
     </Box>
 </Box>
@@ -16,6 +17,17 @@ import { Button, Typography, Avatar, Box } from '@mui/material';
     We will also discuss best practices for using React Router in your projects and provide examples to illustrate its functionality.
     By the end of this article, you will have a solid understanding of how to leverage React Router to build robust and user-friendly applications. 
 </Typography>
+
+<br/>
+--------------------------------------------------------------------------
+<br/>
+--------------------------------------------------------------------------
+<br/>
+
+### Example Come here
+<CodeBlock language="jsx" code={
+    `import React from 'react';
+    import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';`} />
 
 
 

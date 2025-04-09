@@ -7,17 +7,25 @@ import { Helmet } from "react-helmet-async";
 
 const blogs = [
     {
+        "id": 2,
+        "title": "Understanding React Router",
+        "slug": "understanding-react-router",
+        "author": "Hariom Sharma",
+        "content": "React Router helps in building single-page applications with navigation. Let's learn how to set it up and use dynamic routes.",
+        "date": "2024-02-10"
+    },
+    {
         "id": 1,
-        "title": "Getting Started with React",
-        "slug": "getting-started-with-react",
+        "title": "MongoDb to SQL:  A Problematic Journey",
+        "slug": "mongodb-to-sql-a-problematic-journey",
         "author": "Hariom Sharma",
         "content": "React is a JavaScript library for building user interfaces. In this blog, we'll explore the basics of React and how to get started with it.",
         "date": "2024-01-05"
     },
     {
         "id": 2,
-        "title": "Understanding React Router",
-        "slug": "understanding-react-router",
+        "title": "Why Migration To AWS",
+        "slug": "why-migration-to-aws",
         "author": "Hariom Sharma",
         "content": "React Router helps in building single-page applications with navigation. Let's learn how to set it up and use dynamic routes.",
         "date": "2024-02-10"
