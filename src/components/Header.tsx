@@ -81,7 +81,7 @@ const Header = () => {
           onClick={() => { navigate('/') }} // Navigate to home page on logo click
         />
         {/* Desktop Navigation */}
-        <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2, alignItems: 'center' }}>
+        <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 1, alignItems: 'center' }}>
           {navItems.map((item) => (
             <Button
               key={item}
@@ -93,7 +93,7 @@ const Header = () => {
                 '&:hover': {
                   color: themeCtx.themeMode === 'dark' ? 'primary.main' : 'text.light'
                 },
-                fontSize: { sm: '0.9rem', md: '1rem' }
+                fontSize: { sm: '0.8rem', md: '0.8rem' }
               }}
             >
               {item}
@@ -109,6 +109,7 @@ const Header = () => {
               sx={{
                 borderRadius: 2,
                 borderWidth: 2,
+                fontSize: { sm: '0.8rem', md: '0.8rem' },
                 '&:hover': {
                   borderWidth: 2,
                 },
@@ -125,9 +126,9 @@ const Header = () => {
             whileHover={{ scale: 1.05 }}
             color="inherit"
             sx={{
-              ml: 2,
               borderRadius: 2,
               borderWidth: 2,
+              fontSize: { sm: '0.8rem', md: '0.8rem' },
               '&:hover': {
                 borderWidth: 2,
               },
