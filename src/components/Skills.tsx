@@ -12,6 +12,7 @@ const skillCategories = [
       { name: 'Golang', level: 40 },
       { name: 'API Design', level: 95 },
       { name: 'System Design', level: 90 },
+      { name: 'ETL', level: 90 },
     ],
   },
   {
@@ -41,7 +42,6 @@ const skillCategories = [
       { name: 'Kubernetes', level: 85 },
       { name: 'CI/CD', level: 90 },
       { name: 'Terraform', level: 50 },
-      { name: 'ETL', level: 90 },
       { name: 'AWS DMS', level: 75 },
       { name: 'AWS Glue', level: 75 },
       { name: 'Microservices', level: 95 },
