@@ -4,6 +4,7 @@ import MyCustomProvider from "../../context/MDXProvider";
 import { useState, useEffect } from "react";
 import React from "react";
 import NotFound from "../../components/NotFound";
+import ErrorBoundaryWrapper from "../../components/ErrorBoundary";
 
 const BlogDetails = () => {
     const prams = useParams<{ slug: string }>();
@@ -25,11 +26,13 @@ const BlogDetails = () => {
     
 
     return (
-        <MyCustomProvider>
-            <Container maxWidth="lg" sx={{ py: 4 }}>
-                {Content ? React.createElement(Content) : <NotFound />}
-            </Container>
-        </MyCustomProvider>        
+        <ErrorBoundaryWrapper>
+            <MyCustomProvider>
+                <Container maxWidth="lg" sx={{ py: 4 }}>
+                    {Content ? React.createElement(Content) : <NotFound />}
+                </Container>
+            </MyCustomProvider>        
+        </ErrorBoundaryWrapper>
     );
 }
 
