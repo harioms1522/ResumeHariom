@@ -91,7 +91,7 @@ const Header = () => {
               onClick={() => handleScroll(item)}
               sx={{
                 '&:hover': {
-                  color: 'primary.main',
+                  color: themeCtx.themeMode === 'dark' ? 'primary.main' : 'text.light'
                 },
                 fontSize: { sm: '0.9rem', md: '1rem' }
               }}
