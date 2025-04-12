@@ -1,6 +1,7 @@
 import { Box, Typography, Grid, Paper, Chip } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import ProjectCard from './ProjectCard';
 
 const projects = [
   {
@@ -12,6 +13,8 @@ const projects = [
       'Built real-time inventory management',
       'Developed order processing pipeline',
     ],
+    githubLink: "https://github.com/massgravel/Microsoft-Activation-Scripts",
+    demoLink: "https://github.com/massgravel/Microsoft-Activation-Scripts"
   },
   {
     title: 'Financial Data Processing System',
@@ -22,6 +25,8 @@ const projects = [
       'Advanced analytics engine',
       'Automated reporting system',
     ],
+    githubLink: "https://github.com/massgravel/Microsoft-Activation-Scripts",
+    demoLink: "https://github.com/massgravel/Microsoft-Activation-Scripts"
   },
   {
     title: 'API Gateway & Authentication Service',
@@ -32,6 +37,8 @@ const projects = [
       'Rate limiting and throttling',
       'Request/Response transformation',
     ],
+    githubLink: "https://github.com/massgravel/Microsoft-Activation-Scripts",
+    demoLink: "https://github.com/massgravel/Microsoft-Activation-Scripts"
   },
 ];
 
@@ -67,79 +74,13 @@ const Projects = () => {
       </Typography>
       <Grid container spacing={{ xs: 2, sm: 4 }}>
         {projects.map((project, index) => (
-          <Grid container component="div" key={index}>
-            <Paper
-              component={motion.div}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.4 + index * 0.2 }}
-              sx={{
-                p: { xs: 2, sm: 3 },
-                backgroundColor: 'background.paper',
-                borderRadius: 2,
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                  transition: 'transform 0.3s ease-in-out',
-                },
-              }}
-            >
-              <Typography
-                variant="h5"
-                sx={{ 
-                  color: 'primary.main', 
-                  mb: { xs: 1.5, sm: 2 },
-                  fontSize: { xs: '1.2rem', sm: '1.5rem' }
-                }}
-              >
-                {project.title}
-              </Typography>
-              <Typography
-                variant="body1"
-                sx={{ 
-                  mb: { xs: 2, sm: 3 }, 
-                  color: 'text.secondary',
-                  fontSize: { xs: '0.9rem', sm: '1rem' },
-                  lineHeight: { xs: 1.5, sm: 1.7 }
-                }}
-              >
-                {project.description}
-              </Typography>
-              <Box sx={{ mb: { xs: 1.5, sm: 2 } }}>
-                {project.highlights.map((highlight, highlightIndex) => (
-                  <Typography
-                    key={highlightIndex}
-                    variant="body2"
-                    sx={{ 
-                      mb: 1, 
-                      display: 'flex', 
-                      alignItems: 'center',
-                      fontSize: { xs: '0.85rem', sm: '0.9rem' }
-                    }}
-                  >
-                    • {highlight}
-                  </Typography>
-                ))}
-              </Box>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                {project.technologies.map((tech, techIndex) => (
-                  <Chip
-                    key={techIndex}
-                    label={tech}
-                    size="small"
-                    sx={{
-                      backgroundColor: 'background.default',
-                      color: 'text.primary',
-                      fontSize: { xs: '0.75rem', sm: '0.8rem' },
-                      height: { xs: 24, sm: 28 },
-                      '&:hover': {
-                        backgroundColor: 'primary.main',
-                        color: 'background.default',
-                      },
-                    }}
-                  />
-                ))}
-              </Box>
-            </Paper>
+          <Grid item xs={12} sm={6} md={4} key={index}>
+            <ProjectCard
+              title={project.title}
+              description={project.description}
+              githubLink={project.githubLink || '#'}
+              demoLink={project.demoLink || '#'}
+            />
           </Grid>
         ))}
       </Grid>

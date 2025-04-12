@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async";
 
 const blogs = [
     {
-        "id": 2,
+        "id": 22,
         "title": "Understanding React Router",
         "slug": "understanding-react-router",
         "author": "Hariom Sharma",

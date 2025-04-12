@@ -3,7 +3,7 @@ import Hero from "../components/Hero"
 import Experience from "../components/Experience"
 import Skills from "../components/Skills"
 import Contact from "../components/Contact"
-// import Projects from "../components/Projects"
+import Projects from "../components/Projects"
 import { Helmet } from "react-helmet-async"
 import { Box } from "@mui/system"
 import { motion } from "framer-motion"
@@ -38,7 +38,7 @@ const Home = () => {
                     <Hero />
                     <Experience />
                     <Skills />
-                    {/* <Projects /> */}
+                    <Projects />
                     <Contact />
                 </Box>
             </Container>
