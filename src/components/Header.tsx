@@ -43,7 +43,7 @@ const Header = () => {
   const handleDownloadResume = () => {
     const link = document.createElement('a');
     link.href = resume;
-    link.download = 'resume.pdf';
+    link.download = 'HariomSharmaSoftwareEngineer.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
