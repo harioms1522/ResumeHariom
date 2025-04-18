@@ -99,7 +99,7 @@ const Header = () => {
               {item}
             </Button>
           ))}
-          <Link to={'/blog'} style={{ textDecoration: 'none', color: 'inherit' }}>
+          {/* <Link to={'/blog'} style={{ textDecoration: 'none', color: 'inherit' }}>
             <Button
               variant="outlined"
               startIcon={<BlogIcon />}
@@ -117,7 +117,7 @@ const Header = () => {
             >
               Blog
             </Button>
-          </Link>
+          </Link> */}
           <Button
             variant="outlined"
             startIcon={<DownloadIcon />}
