@@ -193,7 +193,7 @@ const Header = () => {
                 {item}
               </MenuItem>
             ))}
-            <MenuItem
+            {/* <MenuItem
               sx={{
                 fontSize: '1rem',
                 '&:hover': {
@@ -205,7 +205,7 @@ const Header = () => {
                 <BlogIcon sx={{ mr: 1 }} />
                 Blog
               </Link>
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem
               onClick={handleDownloadResume}
               sx={{
