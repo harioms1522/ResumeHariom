@@ -55,25 +55,6 @@ _June 2021 – June 2022_
 
 ---
 
-## Projects
-
-**E-commerce Microservices Platform**  
-Designed and implemented a scalable e-commerce platform using microservices architecture. Handles 100k+ daily transactions with 99.9% uptime.
-- Distributed caching, real-time inventory, order processing pipeline
-- Tech: Node.js, MongoDB, Redis, Docker, Kubernetes, AWS
-
-**Financial Data Processing System**  
-Created a high-performance system for processing and analyzing financial data in real-time. Processes 1M+ records per second.
-- Real-time data pipeline, analytics engine, automated reporting
-- Tech: Python, PostgreSQL, Apache Kafka, Elasticsearch, GCP
-
-**API Gateway & Authentication Service**  
-Developed a secure and scalable API gateway with centralized authentication. Serves 50+ microservices with 99.99% availability.
-- JWT-based authentication, rate limiting, request/response transformation
-- Tech: Go, JWT, OAuth2, Redis, Prometheus, Grafana
-
----
-
 ## Contact
 
 - **Email:** harioms1522@gmail.com
