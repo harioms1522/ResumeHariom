@@ -7,44 +7,24 @@ import { Helmet } from "react-helmet-async";
 
 const blogs = [
     {
-        "id": 2,
-        "title": "Understanding React Router",
-        "slug": "understanding-react-router",
+        "id": 6,
+        "title": "Node.js Event Loop vs Python asyncio: A Comprehensive Comparison",
+        "slug": "nodejs-vs-python-asyncio-comparison",
         "author": "Hariom Sharma",
-        "content": "React Router helps in building single-page applications with navigation. Let's learn how to set it up and use dynamic routes.",
-        "date": "2024-02-10"
+        "content": "Compare Node.js Event Loop with Python's asyncio. Understand their architectures, performance characteristics, error handling patterns, and when to use each for optimal results.",
+        "date": "2024-03-25",
+        "tags": ["Node.js", "Python", "asyncio", "Performance", "Comparison"],
+        "readTime": "12 min read"
     },
     {
-        "id": 1,
-        "title": "MongoDb to SQL:  A Problematic Journey",
-        "slug": "mongodb-to-sql-a-problematic-journey",
+        "id": 5,
+        "title": "Understanding Node.js Event Loop: A Deep Dive",
+        "slug": "nodejs-event-loop-deep-dive",
         "author": "Hariom Sharma",
-        "content": "React is a JavaScript library for building user interfaces. In this blog, we'll explore the basics of React and how to get started with it.",
-        "date": "2024-01-05"
-    },
-    {
-        "id": 2,
-        "title": "Why Migration To AWS",
-        "slug": "why-migration-to-aws",
-        "author": "Hariom Sharma",
-        "content": "React Router helps in building single-page applications with navigation. Let's learn how to set it up and use dynamic routes.",
-        "date": "2024-02-10"
-    },
-    {
-        "id": 3,
-        "title": "Dark Mode using MUI",
-        "slug": "dark-mode-using-mui",
-        "author": "Hariom Sharma",
-        "content": "Material UI makes it super easy to implement dark mode using ThemeProvider and context API. Let's implement it step by step.",
-        "date": "2024-03-15"
-    },
-    {
-        "id": 4,
-        "title": "Optimize React Performance",
-        "slug": "optimize-react-performance",
-        "author": "Hariom Sharma",
-        "content": "React provides hooks like useMemo, useCallback, and React.memo to optimize performance. Learn where and how to use them effectively.",
-        "date": "2024-04-01"
+        "content": "Master the Node.js Event Loop - the heart of Node.js's non-blocking I/O operations. Learn about the six phases, microtasks vs macrotasks, and performance optimization techniques.",
+        "date": "2024-03-20",
+        "tags": ["Node.js", "JavaScript", "Performance", "Asynchronous"],
+        "readTime": "8 min read"
     }
 ]
 
