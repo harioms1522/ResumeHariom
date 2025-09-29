@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import NotFound from "../../components/NotFound";
 import ErrorBoundaryWrapper from "../../components/ErrorBoundary";
+import BlogWrapper from "../../components/BlogWrapper";
 
 const BlogDetails = () => {
     const prams = useParams<{ slug: string }>();
@@ -28,9 +29,9 @@ const BlogDetails = () => {
     return (
         <ErrorBoundaryWrapper>
             <MyCustomProvider>
-                <Container maxWidth="lg" sx={{ py: 4 }}>
+                <BlogWrapper maxWidth="lg">
                     {Content ? React.createElement(Content) : <NotFound />}
-                </Container>
+                </BlogWrapper>
             </MyCustomProvider>        
         </ErrorBoundaryWrapper>
     );

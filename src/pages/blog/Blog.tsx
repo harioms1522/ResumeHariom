@@ -1,8 +1,9 @@
-import { Container, List, ListItemText, ListItemButton, Box, Typography } from "@mui/material";
+import { List, ListItemText, ListItemButton, Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import { Helmet } from "react-helmet-async";
+import BlogWrapper from "../../components/BlogWrapper";
 
 
 const blogs = [
@@ -51,15 +52,15 @@ const Blog = () => {
                 <meta property="og:site_name" content="Hariom Sharma" />
                 <meta property="og:locale" content="en_US" />
             </Helmet>
-            <Container maxWidth="lg" sx={{ py: 4 }}>
+            <BlogWrapper maxWidth="lg">
                 <Box
                     ref={ref}
                     component={motion.div}
                     initial={{ opacity: 0 }}
                     animate={inView ? { opacity: 1 } : {}}
                     transition={{ duration: 0.8 }}
-                    sx={{ py: { xs: 4, sm: 8 } }}
-                    id="experience"
+                    sx={{ py: { xs: 2, sm: 4 } }}
+                    id="blog"
                 >
                     <Typography
                         variant="h2"
@@ -81,26 +82,86 @@ const Blog = () => {
                         initial={{ opacity: 0 }}
                         animate={inView ? { opacity: 1 } : {}}
                         transition={{ duration: 0.8 }}
-                        sx={{ px: 4, display: 'flex', flexDirection: 'column', gap: 2 }}
+                        sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
                     >
-                        <List sx={{ width: '100', borderRadius: 2 }}>
+                        <List sx={{ width: '100%', borderRadius: 2 }}>
                             {blogs.map((blog) => (
-                                <ListItemButton sx={{ borderRadius: 2, margin: 2 }} component={Link} to={`/blog/${blog.slug}`} key={blog.id}>
+                                <ListItemButton 
+                                    sx={{ 
+                                        borderRadius: 2, 
+                                        margin: { xs: 1, sm: 2 },
+                                        p: { xs: 2, sm: 3 },
+                                        '&:hover': {
+                                            bgcolor: 'action.hover',
+                                            transform: 'translateY(-2px)',
+                                            boxShadow: 2,
+                                        },
+                                        transition: 'all 0.2s ease-in-out',
+                                    }} 
+                                    component={Link} 
+                                    to={`/blog/${blog.slug}`} 
+                                    key={blog.id}
+                                >
                                     <ListItemText
-                                        secondary={`By ${blog.author} on ${new Date(blog.date).toLocaleDateString()}`
-                                        }>
-                                        <Typography variant="h4" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-                                            {blog.title}
-                                        </Typography>
-                                    </ListItemText>
+                                        primary={
+                                            <Typography 
+                                                variant="h5" 
+                                                sx={{ 
+                                                    fontWeight: 'bold', 
+                                                    color: 'primary.main',
+                                                    fontSize: { xs: '1.25rem', sm: '1.5rem' },
+                                                    mb: 1
+                                                }}
+                                            >
+                                                {blog.title}
+                                            </Typography>
+                                        }
+                                        secondary={
+                                            <Box sx={{ mt: 1 }}>
+                                                <Typography 
+                                                    variant="body2" 
+                                                    color="text.secondary"
+                                                    sx={{ mb: 1 }}
+                                                >
+                                                    By {blog.author} on {new Date(blog.date).toLocaleDateString()}
+                                                </Typography>
+                                                <Typography 
+                                                    variant="body2" 
+                                                    color="text.secondary"
+                                                    sx={{ 
+                                                        fontSize: '0.9rem',
+                                                        lineHeight: 1.4,
+                                                        display: '-webkit-box',
+                                                        WebkitLineClamp: 2,
+                                                        WebkitBoxOrient: 'vertical',
+                                                        overflow: 'hidden',
+                                                    }}
+                                                >
+                                                    {blog.content}
+                                                </Typography>
+                                                {blog.readTime && (
+                                                    <Typography 
+                                                        variant="caption" 
+                                                        color="text.secondary"
+                                                        sx={{ 
+                                                            display: 'block',
+                                                            mt: 1,
+                                                            fontSize: '0.8rem',
+                                                            fontWeight: 'medium'
+                                                        }}
+                                                    >
+                                                        {blog.readTime}
+                                                    </Typography>
+                                                )}
+                                            </Box>
+                                        }
+                                    />
                                 </ListItemButton>
                             ))}
                         </List>
-
                     </Box>
-
                 </Box>
-            </Container>
+            </BlogWrapper>
         </>
     );
 }
