@@ -1,9 +1,8 @@
-import { List, ListItemText, ListItemButton, Box, Typography } from "@mui/material";
+import { Container, List, ListItemText, ListItemButton, Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import { Helmet } from "react-helmet-async";
-import BlogWrapper from "../../components/BlogWrapper";
 
 
 const blogs = [
@@ -52,14 +51,14 @@ const Blog = () => {
                 <meta property="og:site_name" content="Hariom Sharma" />
                 <meta property="og:locale" content="en_US" />
             </Helmet>
-            <BlogWrapper maxWidth="lg">
+            <Container maxWidth="lg" sx={{ py: 4 }}>
                 <Box
                     ref={ref}
                     component={motion.div}
                     initial={{ opacity: 0 }}
                     animate={inView ? { opacity: 1 } : {}}
                     transition={{ duration: 0.8 }}
-                    sx={{ py: { xs: 2, sm: 4 } }}
+                    sx={{ py: { xs: 4, sm: 8 } }}
                     id="blog"
                 >
                     <Typography
@@ -85,7 +84,7 @@ const Blog = () => {
                         initial={{ opacity: 0 }}
                         animate={inView ? { opacity: 1 } : {}}
                         transition={{ duration: 0.8 }}
-                        sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+                        sx={{ px: 4, display: 'flex', flexDirection: 'column', gap: 2 }}
                     >
                         <List sx={{ width: '100%', borderRadius: 2 }}>
                             {blogs.map((blog) => (
@@ -166,7 +165,7 @@ const Blog = () => {
                         </List>
                     </Box>
                 </Box>
-            </BlogWrapper>
+            </Container>
         </>
     );
 }

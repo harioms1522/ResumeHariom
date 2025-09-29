@@ -112,6 +112,9 @@ const BlogWrapper: React.FC<BlogWrapperProps> = ({
                         overflow: 'auto',
                         display: 'block',
                         whiteSpace: 'nowrap',
+                        bgcolor: 'rgba(30, 30, 30, 0.95)',
+                        color: 'white',
+                        borderCollapse: 'collapse',
                         '@media (min-width: 600px)': {
                             display: 'table',
                             whiteSpace: 'normal',
@@ -121,13 +124,30 @@ const BlogWrapper: React.FC<BlogWrapperProps> = ({
                     '& th, & td': {
                         p: { xs: 1, sm: 1.5 },
                         fontSize: { xs: '0.9rem', sm: '1rem' },
-                        color: 'white', // White table text for dark background
+                        color: 'white', // Always white text for dark table theme
+                        border: '1px solid rgba(255, 255, 255, 0.2)', // Always white borders
                     },
                     
+                    '& th': {
+                        bgcolor: 'rgba(255, 255, 255, 0.1)', // Always light background for headers
+                        fontWeight: 'bold',
+                        color: 'white', // Always white text
+                    },
+                    
+                    '& tr:nth-of-type(even)': {
+                        bgcolor: 'rgba(255, 255, 255, 0.05)', // Always subtle alternating rows
+                    },
+                    
+                    '& tr:hover': {
+                        bgcolor: 'rgba(255, 255, 255, 0.1)', // Always hover effect
+                    },
+                
                     // Enhanced spacing for custom components
                     '& .MuiAlert-root': {
                         my: { xs: 2, sm: 3 },
                         borderRadius: { xs: 1, sm: 2 },
+                        color: 'white',
+                        bgcolor: 'rgba(30, 30, 30, 0.95)',
                     },
                     
                     '& .MuiChip-root': {
