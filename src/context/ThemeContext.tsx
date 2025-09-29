@@ -68,12 +68,12 @@ export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
         setThemeMode((prev) => (prev === 'light' ? 'dark' : 'light'));
     };
 
-    useEffect(() => {
-        const savedTheme = localStorage.getItem('themeMode') as 'light' | 'dark' | null;
-        if (savedTheme) {
-            setThemeMode(savedTheme);
-        }
-    }, []);
+    // useEffect(() => {
+    //     const savedTheme = localStorage.getItem('themeMode') as 'light' | 'dark' | null;
+    //     if (savedTheme) {
+    //         setThemeMode(savedTheme);
+    //     }
+    // }, []);
 
     const value = useMemo(() => ({ themeMode, toggleTheme }), [theme]);
 
