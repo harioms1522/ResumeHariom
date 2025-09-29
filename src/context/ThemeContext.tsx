@@ -56,7 +56,7 @@ const darkTheme = createTheme({
 });
 
 export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
-    const [themeMode, setThemeMode] = useState<'light' | 'dark'>('dark');
+    const [themeMode, setThemeMode] = useState<'light' | 'dark'>('light');
 
     const theme = useMemo(() =>
         themeMode === 'dark' ? darkTheme : lightTheme, [themeMode]
