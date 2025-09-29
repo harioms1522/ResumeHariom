@@ -30,6 +30,8 @@ const BlogWrapper: React.FC<BlogWrapperProps> = ({
                 transition={enableAnimations ? { duration: 0.6, ease: 'easeOut' } : {}}
                 sx={{
                     // Enhanced content wrapper with responsive spacing
+                    bgcolor: 'rgba(30, 30, 30, 0.95)', // Dark background for better reading
+                    color: 'white', // White text color for dark background
                     borderRadius: { xs: 1, sm: 2 },
                     p: { 
                         xs: 2, 
@@ -40,6 +42,17 @@ const BlogWrapper: React.FC<BlogWrapperProps> = ({
                     mx: { xs: 0, sm: 1 },
                     my: { xs: 1, sm: 2 },
                     
+                    // White border for dark background
+                    border: '2px solid',
+                    borderColor: 'white',
+                    
+                    // Subtle shadow for depth
+                    boxShadow: {
+                        xs: '0 4px 12px rgba(0,0,0,0.3)',
+                        sm: '0 6px 16px rgba(0,0,0,0.3)',
+                        md: '0 8px 20px rgba(0,0,0,0.3)',
+                    },
+                    
                     // Better typography spacing with Montserrat font
                     '& h1, & h2, & h3, & h4, & h5, & h6': {
                         mb: { xs: 2, sm: 3 },
@@ -47,6 +60,7 @@ const BlogWrapper: React.FC<BlogWrapperProps> = ({
                         fontFamily: '"Montserrat", "Roboto", "Helvetica", "Arial", sans-serif',
                         fontWeight: 600,
                         letterSpacing: '-0.02em',
+                        color: 'white', // White headings for dark background
                         '&:first-of-type': {
                             mt: 0,
                         }
@@ -56,6 +70,7 @@ const BlogWrapper: React.FC<BlogWrapperProps> = ({
                         mb: { xs: 2, sm: 3 },
                         lineHeight: { xs: 1.6, sm: 1.7 },
                         fontSize: { xs: '0.95rem', sm: '1rem' },
+                        color: 'white', // White paragraphs for dark background
                     },
                     
                     '& ul, & ol': {
@@ -66,6 +81,7 @@ const BlogWrapper: React.FC<BlogWrapperProps> = ({
                     '& li': {
                         mb: { xs: 1, sm: 1.5 },
                         fontSize: { xs: '0.95rem', sm: '1rem' },
+                        color: 'white', // White list items for dark background
                     },
                     
                     '& blockquote': {
@@ -75,6 +91,7 @@ const BlogWrapper: React.FC<BlogWrapperProps> = ({
                         borderLeft: { xs: 3, sm: 4 },
                         borderColor: 'primary.main',
                         fontStyle: 'italic',
+                        color: 'white', // White blockquotes for dark background
                     },
                     
                     '& pre': {
@@ -104,6 +121,7 @@ const BlogWrapper: React.FC<BlogWrapperProps> = ({
                     '& th, & td': {
                         p: { xs: 1, sm: 1.5 },
                         fontSize: { xs: '0.9rem', sm: '1rem' },
+                        color: 'white', // White table text for dark background
                     },
                     
                     // Enhanced spacing for custom components
@@ -157,11 +175,13 @@ const BlogWrapper: React.FC<BlogWrapperProps> = ({
                     // Print styles
                     '@media print': {
                         boxShadow: 'none',
-                        border: 'none',
+                        border: '2px solid white', // White border for dark background
                         borderRadius: 0,
                         p: 2,
                         mx: 0,
                         my: 0,
+                        bgcolor: 'rgba(30, 30, 30, 1)', // Dark background for printing
+                        color: 'white', // White text for printing
                     },
                 }}
             >
