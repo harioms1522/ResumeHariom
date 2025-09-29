@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container } from '@mui/material';
+import { Container, Box } from '@mui/material';
 import { motion } from 'framer-motion';
 
 interface BlogWrapperProps {
@@ -13,8 +13,6 @@ const BlogWrapper: React.FC<BlogWrapperProps> = ({
     maxWidth = 'lg',
     enableAnimations = true 
 }) => {
-    const MotionBox = enableAnimations ? motion.div : 'div';
-    
     return (
         <Container 
             maxWidth={maxWidth}
@@ -25,7 +23,8 @@ const BlogWrapper: React.FC<BlogWrapperProps> = ({
                 position: 'relative',
             }}
         >
-            <MotionBox
+            <Box
+                component={motion.div}
                 initial={enableAnimations ? { opacity: 0, y: 20 } : {}}
                 animate={enableAnimations ? { opacity: 1, y: 0 } : {}}
                 transition={enableAnimations ? { duration: 0.6, ease: 'easeOut' } : {}}
@@ -68,10 +67,13 @@ const BlogWrapper: React.FC<BlogWrapperProps> = ({
                         },
                     },
                     
-                    // Better typography spacing
+                    // Better typography spacing with Montserrat font
                     '& h1, & h2, & h3, & h4, & h5, & h6': {
                         mb: { xs: 2, sm: 3 },
                         mt: { xs: 3, sm: 4 },
+                        fontFamily: '"Montserrat", "Roboto", "Helvetica", "Arial", sans-serif',
+                        fontWeight: 600,
+                        letterSpacing: '-0.02em',
                         '&:first-of-type': {
                             mt: 0,
                         }
@@ -229,7 +231,7 @@ const BlogWrapper: React.FC<BlogWrapperProps> = ({
                 }}
             >
                 {children}
-            </MotionBox>
+            </Box>
         </Container>
     );
 };

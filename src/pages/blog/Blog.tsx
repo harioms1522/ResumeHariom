@@ -71,7 +71,10 @@ const Blog = () => {
                         sx={{
                             mb: { xs: 3, sm: 6 },
                             textAlign: 'center',
-                            fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }
+                            fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
+                            fontFamily: '"Montserrat", "Roboto", "Helvetica", "Arial", sans-serif',
+                            fontWeight: 600,
+                            letterSpacing: '-0.02em'
                         }}
                     >
                         Blog
@@ -107,10 +110,12 @@ const Blog = () => {
                                             <Typography 
                                                 variant="h5" 
                                                 sx={{ 
-                                                    fontWeight: 'bold', 
+                                                    fontWeight: 600, 
                                                     color: 'primary.main',
                                                     fontSize: { xs: '1.25rem', sm: '1.5rem' },
-                                                    mb: 1
+                                                    mb: 1,
+                                                    fontFamily: '"Montserrat", "Roboto", "Helvetica", "Arial", sans-serif',
+                                                    letterSpacing: '-0.02em'
                                                 }}
                                             >
                                                 {blog.title}
