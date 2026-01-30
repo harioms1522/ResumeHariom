@@ -11,7 +11,7 @@ function App() {
   return (
     <CustomThemeProvider>
         <CssBaseline />
-        <Box sx={{ minHeight: '100vh' }}>
+        <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />

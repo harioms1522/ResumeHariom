@@ -1,22 +1,18 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Button, Box, IconButton, Menu, MenuItem } from '@mui/material';
-import { motion } from 'framer-motion';
 import MenuIcon from '@mui/icons-material/Menu';
 import DownloadIcon from '@mui/icons-material/Download';
-// icon for blog button
 import BlogIcon from '@mui/icons-material/Article';
-
 import { ThemeContext } from '../context/ThemeContext';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
-
 import { Link } from 'react-router-dom';
 
-// import resumeLogoTrans from '../assets/images/logo_transparent.png';
 import resumeLogoNavBar from '../assets/images/logo_navbar_ready.png';
 import resume from '../assets/Resume.pdf';
 
+const navItems = ['About', 'Experience', 'Skills', 'Contact'];
 
 const Header = () => {
   const navigate = useNavigate();
@@ -24,8 +20,6 @@ const Header = () => {
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [scrollTarget, setScrollTarget] = useState<string | null>(null);
-  const navItems = ['About', 'Experience', 'Skills', 'Projects', 'Contact'];
-  // const navItems = ['About', 'Experience', 'Skills', 'Contact'];
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -43,7 +37,7 @@ const Header = () => {
   const handleDownloadResume = () => {
     const link = document.createElement('a');
     link.href = resume;
-    link.download = 'HariomSharmaSoftwareEngineer.pdf';
+    link.download = 'HariomSharma-SoftwareEngineer.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -62,56 +56,67 @@ const Header = () => {
   return (
     <AppBar
       position="sticky"
-      sx={{ boxShadow: 'none' }}>
+      elevation={0}
+      sx={{
+        backgroundColor: 'background.paper',
+        color: 'text.primary',
+        borderBottom: 1,
+        borderColor: 'divider',
+      }}
+    >
       <Toolbar
         sx={{
           display: 'flex',
-          justifyContent: 'space-around',
+          justifyContent: 'space-between',
           alignItems: 'center',
+          minHeight: { xs: 56, sm: 64 },
+          px: { xs: 1, sm: 2 },
         }}
       >
         <Box
           component="img"
           src={resumeLogoNavBar}
-          alt="Resume Logo"
+          alt="Hariom Sharma"
           sx={{
-            width: { xs: '120px', sm: '150px' },
+            width: { xs: 100, sm: 120 },
             height: 'auto',
+            cursor: 'pointer',
           }}
-          onClick={() => { navigate('/') }} // Navigate to home page on logo click
+          onClick={() => navigate('/')}
         />
-        {/* Desktop Navigation */}
-        <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 1, alignItems: 'center' }}>
+
+        <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center', gap: 0.5 }}>
           {navItems.map((item) => (
             <Button
               key={item}
-              component={motion.button}
-              whileHover={{ scale: 1.05 }}
               color="inherit"
               onClick={() => handleScroll(item)}
               sx={{
+                textTransform: 'none',
+                fontWeight: 500,
+                fontSize: '0.9rem',
+                color: 'text.secondary',
                 '&:hover': {
-                  color: themeCtx.themeMode === 'dark' ? 'primary.main' : 'text.light'
+                  color: 'text.primary',
+                  backgroundColor: 'action.hover',
                 },
-                fontSize: { sm: '0.8rem', md: '0.8rem' }
               }}
             >
               {item}
             </Button>
           ))}
-          <Link to={'/blog'} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to="/blog" style={{ textDecoration: 'none' }}>
             <Button
-              variant="outlined"
-              startIcon={<BlogIcon />}
-              component={motion.button}
-              whileHover={{ scale: 1.05 }}
               color="inherit"
+              startIcon={<BlogIcon sx={{ fontSize: '1.1rem' }} />}
               sx={{
-                borderRadius: 2,
-                borderWidth: 2,
-                fontSize: { sm: '0.8rem', md: '0.8rem' },
+                textTransform: 'none',
+                fontWeight: 500,
+                fontSize: '0.9rem',
+                color: 'text.secondary',
                 '&:hover': {
-                  borderWidth: 2,
+                  color: 'text.primary',
+                  backgroundColor: 'action.hover',
                 },
               }}
             >
@@ -119,39 +124,51 @@ const Header = () => {
             </Button>
           </Link>
           <Button
-            variant="outlined"
+            variant="contained"
+            size="small"
             startIcon={<DownloadIcon />}
             onClick={handleDownloadResume}
-            component={motion.button}
-            whileHover={{ scale: 1.05 }}
-            color="inherit"
             sx={{
-              borderRadius: 2,
-              borderWidth: 2,
-              fontSize: { sm: '0.8rem', md: '0.8rem' },
+              ml: 1,
+              textTransform: 'none',
+              fontWeight: 600,
+              fontSize: '0.875rem',
+              backgroundColor: 'text.primary',
+              color: 'background.default',
               '&:hover': {
-                borderWidth: 2,
+                backgroundColor: 'text.secondary',
               },
             }}
           >
             Resume
           </Button>
-          <Button
-            variant="outlined"
+          <IconButton
+            size="small"
             onClick={themeCtx.toggleTheme}
-            component={motion.button}
-            color="inherit"
+            sx={{ color: 'text.secondary', ml: 0.5 }}
+            aria-label="toggle theme"
           >
             {themeCtx.themeMode === 'dark' ? (
-              <LightModeIcon color='inherit' />
+              <LightModeIcon fontSize="small" />
             ) : (
-              <DarkModeIcon color='inherit' />
+              <DarkModeIcon fontSize="small" />
             )}
-          </Button>
+          </IconButton>
         </Box>
 
-        {/* Mobile Navigation */}
-        <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+        <Box sx={{ display: { xs: 'flex', sm: 'none' }, alignItems: 'center', gap: 0.5 }}>
+          <IconButton
+            size="small"
+            onClick={themeCtx.toggleTheme}
+            sx={{ color: 'text.secondary' }}
+            aria-label="toggle theme"
+          >
+            {themeCtx.themeMode === 'dark' ? (
+              <LightModeIcon fontSize="small" />
+            ) : (
+              <DarkModeIcon fontSize="small" />
+            )}
+          </IconButton>
           <IconButton
             size="large"
             edge="end"
@@ -170,67 +187,35 @@ const Header = () => {
               sx: {
                 backgroundColor: 'background.paper',
                 color: 'text.primary',
-                mt: 1,
+                mt: 1.5,
+                minWidth: 200,
+                boxShadow: 2,
                 '& .MuiMenuItem-root': {
+                  fontSize: '0.95rem',
                   '&:hover': {
-                    backgroundColor: 'background.default',
+                    backgroundColor: 'action.hover',
                   },
                 },
               },
             }}
           >
             {navItems.map((item) => (
-              <MenuItem
-                key={item}
-                onClick={() => handleScroll(item)}
-                sx={{
-                  fontSize: '1rem',
-                  '&:hover': {
-                    color: 'primary.main',
-                  },
-                }}
-              >
+              <MenuItem key={item} onClick={() => handleScroll(item)}>
                 {item}
               </MenuItem>
             ))}
             <MenuItem
-              sx={{
-                fontSize: '1rem',
-                '&:hover': {
-                  color: 'primary.main',
-                },
-              }}
+              component={Link}
+              to="/blog"
+              onClick={handleClose}
+              sx={{ textDecoration: 'none', color: 'inherit' }}
             >
-              <Link to={'/blog'} style={{ textDecoration: 'none', color: 'inherit' }}>
-                <BlogIcon sx={{ mr: 1 }} />
-                Blog
-              </Link>
+              <BlogIcon sx={{ mr: 1, fontSize: '1.2rem' }} />
+              Blog
             </MenuItem>
-            <MenuItem
-              onClick={handleDownloadResume}
-              sx={{
-                fontSize: '1rem',
-                '&:hover': {
-                  color: 'primary.main',
-                },
-              }}
-            >
-              <DownloadIcon sx={{ mr: 1 }} /> Resume
-            </MenuItem>
-            <MenuItem
-              onClick={themeCtx.toggleTheme}
-              sx={{
-                fontSize: '1rem',
-                '&:hover': {
-                  color: 'primary.main',
-                },
-              }}
-            >
-              {themeCtx.themeMode === 'dark' ? (
-                <LightModeIcon color='inherit' sx={{ mr: 1 }} />
-              ) : (
-                <DarkModeIcon color='inherit' sx={{ mr: 1 }} />
-              )} Mode
+            <MenuItem onClick={handleDownloadResume}>
+              <DownloadIcon sx={{ mr: 1, fontSize: '1.2rem' }} />
+              Download Resume
             </MenuItem>
           </Menu>
         </Box>
@@ -239,4 +224,4 @@ const Header = () => {
   );
 };
 
-export default Header; 
+export default Header;

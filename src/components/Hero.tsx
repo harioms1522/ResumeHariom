@@ -1,14 +1,9 @@
-import { Box, Typography, Container, Grid, Paper } from '@mui/material';
+import { Box, Typography, Container, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import CodeIcon from '@mui/icons-material/Code';
-import CloudIcon from '@mui/icons-material/Cloud';
-import StorageIcon from '@mui/icons-material/Storage';
-import SettingsIcon from '@mui/icons-material/Settings';
-import SpeedIcon from '@mui/icons-material/Speed';
-import SecurityIcon from '@mui/icons-material/Security';
-// import resumeLogo from '../assets/images/resume_logo.png';
-// import resumeLogoTrans from '../assets/images/logo_transparent.png';
+import DownloadIcon from '@mui/icons-material/Download';
+import EmailIcon from '@mui/icons-material/Email';
+import resume from '../assets/Resume.pdf';
 
 const Hero = () => {
   const [ref, inView] = useInView({
@@ -16,32 +11,19 @@ const Hero = () => {
     threshold: 0.1,
   });
 
-  const summaryPoints = [
-    {
-      icon: <CodeIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'secondary.main' }} />,
-      text: "Results-driven Backend Engineer and Cloud Infrastructure Specialist with hands-on experience in designing, building, and managing scalable backend systems and cloud infrastructure for e-commerce and social commerce platforms."
-    },
-    {
-      icon: <SettingsIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'secondary.main' }} />,
-      text: "Experienced in end-to-end ownership of Order Management Systems (OMS), CRM, Warehouse Management System (WMS) integrations, and backend architecture."
-    },
-    {
-      icon: <StorageIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'secondary.main' }} />,
-      text: "Proven expertise in backend development using Node.js, Python, and SQL/NoSQL databases like MongoDB, MySQL, and Redshift."
-    },
-    {
-      icon: <CloudIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'secondary.main' }} />,
-      text: "Skilled in AWS Cloud ecosystem with strong exposure to AWS Glue, AWS DMS, Redshift DB, EKS, ECS, and Terraform for infrastructure automation."
-    },
-    {
-      icon: <SpeedIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'secondary.main' }} />,
-      text: "Experienced in ETL development, data pipeline management, and collaboration with BI teams for data-driven solutions."
-    },
-    {
-      icon: <SecurityIcon sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, color: 'secondary.main' }} />,
-      text: "Proficient in Docker, Docker Compose, and Kubernetes for containerization and orchestration of microservices-based architecture."
-    }
-  ];
+  const scrollToContact = () => {
+    const el = document.getElementById('contact');
+    el?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleDownloadResume = () => {
+    const link = document.createElement('a');
+    link.href = resume;
+    link.download = 'HariomSharma-SoftwareEngineer.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <Box
@@ -49,127 +31,126 @@ const Hero = () => {
       component={motion.div}
       initial={{ opacity: 0 }}
       animate={inView ? { opacity: 1 } : {}}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.6 }}
       sx={{
-        minHeight: { xs: '60vh', sm: '80vh' },
-        display: 'flex',
-        alignItems: 'center',
-        py: { xs: 4, sm: 8 },
-        backgroundColor: 'background.default',
+        pt: { xs: 4, sm: 6 },
+        pb: { xs: 6, sm: 8 },
+        borderBottom: 1,
+        borderColor: 'divider',
       }}
       id="about"
     >
-      <Container maxWidth="lg">
-        <Grid container spacing={{ xs: 4, sm: 6 }} alignItems="center">
-          <Grid item xs={12} md={6}>
-            <Box
-              component={motion.div}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 }}
+      <Container maxWidth="md">
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center',
+          }}
+        >
+          <Typography
+            variant="h1"
+            component={motion.h1}
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.1 }}
+            sx={{
+              fontSize: { xs: '2.25rem', sm: '2.75rem', md: '3.25rem' },
+              fontWeight: 700,
+              color: 'text.primary',
+              letterSpacing: '-0.02em',
+              mb: 0.5,
+            }}
+          >
+            Hariom Sharma
+          </Typography>
+          <Typography
+            variant="h2"
+            component={motion.h2}
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2 }}
+            sx={{
+              fontSize: { xs: '1.125rem', sm: '1.25rem' },
+              fontWeight: 500,
+              color: 'text.secondary',
+              mb: 2,
+            }}
+          >
+            Full Stack Engineer
+          </Typography>
+          <Typography
+            component={motion.p}
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.3 }}
+            sx={{
+              fontSize: { xs: '0.95rem', sm: '1rem' },
+              color: 'text.secondary',
+              lineHeight: 1.7,
+              maxWidth: 540,
+              mb: 3,
+            }}
+          >
+            Backend & cloud specialist building scalable systems. Specialist in Go (Golang), Node.js, Python, AWS, and modern DevOps. Deep experience setting up Kubernetes (K8s) for microservices. Focus on order management, CRM, ETL, and microservices.
+          </Typography>
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.4 }}
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 2,
+              justifyContent: 'center',
+            }}
+          >
+            <Button
+              variant="contained"
+              startIcon={<DownloadIcon />}
+              onClick={handleDownloadResume}
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                mb: { xs: 2, sm: 3 },
+                px: 2.5,
+                py: 1.25,
+                fontWeight: 600,
+                textTransform: 'none',
+                fontSize: '0.9375rem',
+                backgroundColor: 'text.primary',
+                color: 'background.default',
+                '&:hover': {
+                  backgroundColor: 'text.secondary',
+                },
               }}
             >
-              <Typography
-                variant="h1"
-                component={motion.h1}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.2 }}
-                sx={{
-                  fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem' },
-                  fontWeight: 'bold',
-                  color: 'primary.main',
-                  lineHeight: 1.2,
-                }}
-              >
-                Full Stack Engineer
-              </Typography>
-              <Typography
-                variant="h5"
-                component={motion.h5}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.4 }}
-                sx={{
-                  color: 'text.secondary',
-                  mb: { xs: 3, sm: 4 },
-                  fontSize: { xs: '1.2rem', sm: '1.5rem' },
-                  lineHeight: 1.5,
-                }}
-              >
-                Crafting innovative solutions as a Full Stack Engineer, specializing in backend systems, cloud infrastructure, and scalable architectures to empower modern applications.
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Box
-              component={motion.div}
-              initial={{ opacity: 0, x: 20 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 0.6 }}
+              Download Resume
+            </Button>
+            <Button
+              variant="outlined"
+              startIcon={<EmailIcon />}
+              onClick={scrollToContact}
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: { xs: 2, sm: 3 },
+                px: 2.5,
+                py: 1.25,
+                fontWeight: 600,
+                textTransform: 'none',
+                fontSize: '0.9375rem',
+                borderColor: 'divider',
+                color: 'text.primary',
+                '&:hover': {
+                  borderColor: 'text.secondary',
+                  backgroundColor: 'action.hover',
+                },
               }}
             >
-              {summaryPoints.map((point, index) => (
-                <Paper
-                  key={index}
-                  component={motion.div}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.8 + index * 0.1 }}
-                  sx={{
-                    p: { xs: 2, sm: 3 },
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: { xs: 2, sm: 3 },
-                    // backgroundColor: 'background.paper',
-                    borderRadius: 2,
-                    boxShadow: 1,
-                    '&:hover': {
-                      boxShadow: 3,
-                      transform: 'translateY(-2px)',
-                      transition: 'all 0.3s ease-in-out',
-                    },
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      minWidth: { xs: 40, sm: 48 },
-                      height: { xs: 40, sm: 48 },
-                      borderRadius: 1
-                    }}
-                  >
-                    {point.icon}
-                  </Box>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: 'text.primary',
-                      fontSize: { xs: '0.9rem', sm: '1rem' },
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    {point.text}
-                  </Typography>
-                </Paper>
-              ))}
-            </Box>
-          </Grid>
-        </Grid>
+              Get in Touch
+            </Button>
+          </Box>
+        </Box>
       </Container>
     </Box>
   );
 };
 
-export default Hero; 
+export default Hero;

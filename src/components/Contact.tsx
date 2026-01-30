@@ -1,4 +1,4 @@
-import { Box, Typography, Paper, Grid, Link, IconButton, TextField, Button, Snackbar, Alert } from '@mui/material';
+import { Box, Typography, Grid, Link, IconButton, TextField, Button, Snackbar, Alert } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -6,28 +6,42 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import DownloadIcon from '@mui/icons-material/Download';
 import { useState, FormEvent, useEffect } from 'react';
-import resume from '../assets/Resume.pdf'
+import resume from '../assets/Resume.pdf';
+
+const SectionTitle = ({ children }: { children: string }) => (
+  <Typography
+    variant="h2"
+    sx={{
+      fontSize: { xs: '1.5rem', sm: '1.75rem' },
+      fontWeight: 600,
+      color: 'text.primary',
+      mb: { xs: 3, sm: 4 },
+      pb: 1,
+      borderBottom: 2,
+      borderColor: 'divider',
+      display: 'inline-block',
+    }}
+  >
+    {children}
+  </Typography>
+);
 
 const Contact = () => {
-  const [formSubmitted, setFormSubmitted] = useState(false)
-
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
-    severity: 'success' as 'success' | 'error'
+    severity: 'success' as 'success' | 'error',
   });
 
   useEffect(() => {
     if (formSubmitted) {
-      const element = document.getElementById("about");
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      const element = document.getElementById('about');
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
       setFormSubmitted(false);
     }
   }, [formSubmitted]);
@@ -35,44 +49,30 @@ const Contact = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    
     try {
       const response = await fetch('https://formspree.io/f/mzzekjyo', {
         method: 'POST',
         body: formData,
-        headers: {
-          Accept: 'application/json',
-        },
+        headers: { Accept: 'application/json' },
       });
-
       if (response.ok) {
-        setSnackbar({
-          open: true,
-          message: 'Message sent successfully!',
-          severity: 'success'
-        });
+        setSnackbar({ open: true, message: 'Message sent successfully!', severity: 'success' });
         (e.target as HTMLFormElement).reset();
         setFormSubmitted(true);
       } else {
         throw new Error('Failed to send message');
       }
-    } catch (error) {
-      setSnackbar({
-        open: true,
-        message: 'Failed to send message. Please try again.',
-        severity: 'error'
-      });
+    } catch {
+      setSnackbar({ open: true, message: 'Failed to send message. Please try again.', severity: 'error' });
     }
   };
 
-  const handleCloseSnackbar = () => {
-    setSnackbar(prev => ({ ...prev, open: false }));
-  };
+  const handleCloseSnackbar = () => setSnackbar((prev) => ({ ...prev, open: false }));
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
     link.href = resume;
-    link.download = 'resume.pdf';
+    link.download = 'HariomSharma-SoftwareEngineer.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -84,272 +84,135 @@ const Contact = () => {
       component={motion.div}
       initial={{ opacity: 0 }}
       animate={inView ? { opacity: 1 } : {}}
-      transition={{ duration: 0.8 }}
-      sx={{ py: { xs: 4, sm: 8 } }}
+      transition={{ duration: 0.5 }}
+      sx={{ py: { xs: 5, sm: 6 }, pb: 8 }}
       id="contact"
     >
-      <Typography
-        variant="h2"
-        component={motion.h2}
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.2 }}
-        sx={{ 
-          mb: { xs: 3, sm: 6 }, 
-          textAlign: 'center',
-          fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }
-        }}
-      >
-        Contact
-      </Typography>
+      <SectionTitle>Contact</SectionTitle>
 
-      <Paper
-        component={motion.div}
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.4 }}
-        sx={{
-          p: { xs: 2, sm: 4 },
-          backgroundColor: 'background.paper',
-          borderRadius: 2,
-          maxWidth: 1200,
-          mx: 'auto',
-        }}
-      >
-        <Grid container spacing={{ xs: 4, sm: 6 }} alignItems="center">
-          {/* Form Column */}
-          <Grid item xs={12} md={7}>
-            <Typography
-              variant="h5"
-              sx={{ 
-                color: 'primary.main', 
-                mb: { xs: 2, sm: 3 },
-                fontSize: { xs: '1.3rem', sm: '1.5rem' },
-                textAlign: 'center'
-              }}
-            >
-              Send a Message
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{ 
-                mb: { xs: 3, sm: 4 }, 
-                color: 'text.secondary',
-                fontSize: { xs: '0.9rem', sm: '1rem' },
-                lineHeight: { xs: 1.5, sm: 1.7 },
-                textAlign: 'center'
-              }}
-            >
-              Have a question or want to work together? Drop me a message!
-            </Typography>
-            
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
+      <Grid container spacing={{ xs: 4, sm: 6 }} alignItems="flex-start">
+        <Grid item xs={12} md={7}>
+          <Typography
+            variant="subtitle1"
+            sx={{ fontWeight: 600, color: 'text.primary', mb: 1 }}
+          >
+            Send a message
+          </Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+            Have a question or want to work together? Drop me a message.
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+          >
+            <TextField
+              required
+              fullWidth
+              label="Name"
+              name="name"
+              variant="outlined"
+              size="small"
+              sx={{ '& .MuiOutlinedInput-root': { borderRadius: 1.5 } }}
+            />
+            <TextField
+              required
+              fullWidth
+              label="Email"
+              name="email"
+              type="email"
+              variant="outlined"
+              size="small"
+              sx={{ '& .MuiOutlinedInput-root': { borderRadius: 1.5 } }}
+            />
+            <TextField
+              required
+              fullWidth
+              label="Message"
+              name="message"
+              multiline
+              rows={4}
+              variant="outlined"
+              size="small"
+              sx={{ '& .MuiOutlinedInput-root': { borderRadius: 1.5 } }}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              size="medium"
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: { xs: 2, sm: 3 },
-                mb: { xs: 3, sm: 4 }
+                alignSelf: 'flex-start',
+                textTransform: 'none',
+                fontWeight: 600,
+                backgroundColor: 'text.primary',
+                color: 'background.default',
+                '&:hover': { backgroundColor: 'text.secondary' },
               }}
             >
-              <TextField
-                required
-                fullWidth
-                label="Name"
-                name="name"
-                variant="outlined"
-                sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
-              />
-              <TextField
-                required
-                fullWidth
-                label="Email"
-                name="email"
-                type="email"
-                variant="outlined"
-                sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
-              />
-              <TextField
-                required
-                fullWidth
-                label="Message"
-                name="message"
-                multiline
-                rows={4}
-                variant="outlined"
-                sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                size="large"
-                sx={{
-                  borderRadius: 2,
-                  py: 1.5,
-                  fontSize: { xs: '0.9rem', sm: '1rem' },
-                  alignSelf: 'flex-start'
-                }}
-              >
-                Send Message
-              </Button>
-            </Box>
-          </Grid>
-
-          {/* Social Links Column */}
-          <Grid item xs={12} md={5}>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: '100%',
-                gap: { xs: 3, sm: 4 },
-                p: { xs: 2, sm: 3 },
-                borderLeft: { md: 1, xs: 'none' },
-                borderTop: { xs: 1, md: 'none' },
-                borderColor: 'divider',
-                mt: { xs: 3, md: 0 },
-                ml: { md: 3, xs: 0 },
-                pt: { xs: 3, md: 0 },
-              }}
-            >
-              <Typography
-                variant="h5"
-                sx={{ 
-                  color: 'primary.main', 
-                  mb: { xs: 2, sm: 3 },
-                  fontSize: { xs: '1.3rem', sm: '1.5rem' },
-                  textAlign: 'center'
-                }}
-              >
-                Connect With Me
-              </Typography>
-              <Typography
-                variant="body1"
-                sx={{ 
-                  mb: { xs: 1, sm: 1 }, 
-                  color: 'text.secondary',
-                  fontSize: { xs: '0.9rem', sm: '1rem' },
-                  lineHeight: { xs: 1.5, sm: 1.7 },
-                  textAlign: 'center'
-                }}
-              >
-                Let's connect on social media or reach out directly via email.
-              </Typography>
-              
-              <Box 
-                sx={{ 
-                  display: 'flex', 
-                  flexDirection: 'row',
-                  gap: { xs: 3, sm: 4 },
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '100%',
-                  flexWrap: 'wrap'
-                }}
-              >
-                <Link
-                  href="https://github.com/harioms1522"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{ textDecoration: 'none' }}
-                >
-                  <IconButton
-                    component={motion.button}
-                    whileHover={{ scale: 1.1 }}
-                    sx={{
-                      color: 'text.primary',
-                      '&:hover': {
-                        color: 'primary.main',
-                      },
-                      width: { xs: 48, sm: 56 },
-                      height: { xs: 48, sm: 56 },
-                    }}
-                  >
-                    <GitHubIcon sx={{ fontSize: { xs: '2rem', sm: '2.5rem' } }} />
-                  </IconButton>
-                </Link>
-                <Link
-                  href="https://linkedin.com/in/harioms152"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{ textDecoration: 'none' }}
-                >
-                  <IconButton
-                    component={motion.button}
-                    whileHover={{ scale: 1.1 }}
-                    sx={{
-                      color: 'text.primary',
-                      '&:hover': {
-                        color: 'primary.main',
-                      },
-                      width: { xs: 48, sm: 56 },
-                      height: { xs: 48, sm: 56 },
-                    }}
-                  >
-                    <LinkedInIcon sx={{ fontSize: { xs: '2rem', sm: '2.5rem' } }} />
-                  </IconButton>
-                </Link>
-                <Link
-                  href="mailto:harioms1522@gmail.com"
-                  sx={{ textDecoration: 'none' }}
-                >
-                  <IconButton
-                    component={motion.button}
-                    whileHover={{ scale: 1.1 }}
-                    sx={{
-                      color: 'text.primary',
-                      '&:hover': {
-                        color: 'primary.main',
-                      },
-                      width: { xs: 48, sm: 56 },
-                      height: { xs: 48, sm: 56 },
-                    }}
-                  >
-                    <EmailIcon sx={{ fontSize: { xs: '2rem', sm: '2.5rem' } }} />
-                  </IconButton>
-                </Link>
-              </Box>
-
-              {/* Download Resume Button */}
-              <Button
-                variant="outlined"
-                startIcon={<DownloadIcon />}
-                onClick={handleDownloadResume}
-                component={motion.button}
-                whileHover={{ scale: 1.05 }}
-                sx={{
-                  mt: { xs: 2, sm: 3 },
-                  borderRadius: 2,
-                  py: 1.5,
-                  px: 3,
-                  fontSize: { xs: '0.9rem', sm: '1rem' },
-                  borderWidth: 2,
-                  '&:hover': {
-                    borderWidth: 2,
-                  },
-                }}
-              >
-                Download Resume
-              </Button>
-            </Box>
-          </Grid>
+              Send Message
+            </Button>
+          </Box>
         </Grid>
-      </Paper>
 
-      <Snackbar 
-        open={snackbar.open} 
-        autoHideDuration={6000} 
+        <Grid item xs={12} md={5}>
+          <Box
+            sx={{
+              p: 2,
+              border: 1,
+              borderColor: 'divider',
+              borderRadius: 2,
+              backgroundColor: 'background.paper',
+            }}
+          >
+            <Typography variant="subtitle1" sx={{ fontWeight: 600, color: 'text.primary', mb: 1 }}>
+              Connect
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+              Reach out on socials or email.
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+              <Link href="https://github.com/harioms1522" target="_blank" rel="noopener noreferrer" sx={{ color: 'text.secondary' }}>
+                <IconButton size="small" sx={{ color: 'inherit', '&:hover': { color: 'text.primary' } }}>
+                  <GitHubIcon />
+                </IconButton>
+              </Link>
+              <Link href="https://linkedin.com/in/harioms152" target="_blank" rel="noopener noreferrer" sx={{ color: 'text.secondary' }}>
+                <IconButton size="small" sx={{ color: 'inherit', '&:hover': { color: 'text.primary' } }}>
+                  <LinkedInIcon />
+                </IconButton>
+              </Link>
+              <Link href="mailto:harioms1522@gmail.com" sx={{ color: 'text.secondary' }}>
+                <IconButton size="small" sx={{ color: 'inherit', '&:hover': { color: 'text.primary' } }}>
+                  <EmailIcon />
+                </IconButton>
+              </Link>
+            </Box>
+            <Button
+              variant="outlined"
+              size="small"
+              startIcon={<DownloadIcon />}
+              onClick={handleDownloadResume}
+              sx={{
+                textTransform: 'none',
+                fontWeight: 600,
+                borderColor: 'divider',
+                color: 'text.primary',
+                '&:hover': { borderColor: 'text.secondary', backgroundColor: 'action.hover' },
+              }}
+            >
+              Download Resume
+            </Button>
+          </Box>
+        </Grid>
+      </Grid>
+
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
         onClose={handleCloseSnackbar}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
-        <Alert 
-          onClose={handleCloseSnackbar} 
-          severity={snackbar.severity}
-          sx={{ width: '100%' }}
-        >
+        <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} sx={{ width: '100%' }}>
           {snackbar.message}
         </Alert>
       </Snackbar>
@@ -357,4 +220,4 @@ const Contact = () => {
   );
 };
 
-export default Contact; 
+export default Contact;

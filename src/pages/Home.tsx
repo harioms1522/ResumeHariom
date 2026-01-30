@@ -27,18 +27,17 @@ const Home = () => {
                 <meta property="og:site_name" content="Hariom Sharma" />
                 <meta property="og:locale" content="en_US" />
             </Helmet>
-            <Container maxWidth="lg" sx={{ py: 4 }}>
+            <Container maxWidth="md" sx={{ px: { xs: 2, sm: 3 }, py: 0 }}>
                 <Box
-                    component={motion.div} 
-                    initial={{ opacity: 0 }} 
-                    animate={{ opacity: 1 }} 
-                    exit={{ opacity: 0 }} 
-                    transition={{ duration: 0.5 }}
+                    component={motion.div}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4 }}
                 >
                     <Hero />
                     <Experience />
                     <Skills />
-                    {/* <Projects /> */}
                     <Contact />
                 </Box>
             </Container>
