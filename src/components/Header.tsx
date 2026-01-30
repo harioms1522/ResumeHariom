@@ -31,6 +31,8 @@ import { Link } from 'react-router-dom';
 import resumeLogoNavBar from '../assets/images/logo_navbar_ready.png';
 import resume from '../assets/Resume.pdf';
 
+const SECTION_IDS = ['about', 'experience', 'skills', 'contact'] as const;
+
 const navItems = [
   { label: 'About', id: 'about', icon: <PersonIcon /> },
   { label: 'Experience', id: 'experience', icon: <WorkIcon /> },
@@ -48,6 +50,7 @@ const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrollTarget, setScrollTarget] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
 
   const isHome = location.pathname === '/';
 
@@ -82,11 +85,44 @@ const Header = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navLinkSx = {
+  // Active section highlight: which section is in the "trigger zone" (top ~30% of viewport)
+  useEffect(() => {
+    if (!isHome) {
+      setActiveSection(null);
+      return;
+    }
+    const triggerTop = 120;
+    const updateActive = () => {
+      const sections = SECTION_IDS.map((id) => ({
+        id,
+        top: document.getElementById(id)?.getBoundingClientRect().top ?? Infinity,
+      }));
+      const passed = sections.filter((s) => s.top <= triggerTop);
+      const active = passed.length > 0 ? passed[passed.length - 1].id : SECTION_IDS[0];
+      setActiveSection(active);
+    };
+
+    updateActive();
+    const observer = new IntersectionObserver(
+      () => updateActive(),
+      { root: null, rootMargin: '-100px 0px -50% 0px', threshold: 0 }
+    );
+    SECTION_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    window.addEventListener('scroll', updateActive, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', updateActive);
+    };
+  }, [isHome]);
+
+  const navLinkSx = (active?: boolean) => ({
     textTransform: 'none',
-    fontWeight: 500,
+    fontWeight: active ? 600 : 500,
     fontSize: '0.9375rem',
-    color: 'text.secondary',
+    color: active ? 'text.primary' : 'text.secondary',
     px: 1.5,
     py: 0.75,
     borderRadius: 1,
@@ -94,8 +130,8 @@ const Header = () => {
       content: '""',
       position: 'absolute',
       bottom: 0,
-      left: '50%',
-      width: 0,
+      left: active ? 0 : '50%',
+      width: active ? '100%' : 0,
       height: 2,
       bgcolor: 'text.primary',
       transition: 'width 0.2s ease, left 0.2s ease',
@@ -105,7 +141,7 @@ const Header = () => {
       backgroundColor: 'action.hover',
       '&::after': { width: '100%', left: 0 },
     },
-  };
+  });
 
   const desktopNav = (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
@@ -115,7 +151,7 @@ const Header = () => {
             key={item.id}
             color="inherit"
             onClick={() => handleScrollTo(item.id)}
-            sx={{ ...navLinkSx, position: 'relative' }}
+            sx={{ ...navLinkSx(activeSection === item.id), position: 'relative' }}
           >
             {item.label}
           </Button>
@@ -123,7 +159,7 @@ const Header = () => {
       <Link to="/blog" style={{ textDecoration: 'none' }}>
         <Button
           color="inherit"
-          sx={{ ...navLinkSx, position: 'relative' }}
+          sx={{ ...navLinkSx(), position: 'relative' }}
           startIcon={<BlogIcon sx={{ fontSize: '1.1rem' }} />}
         >
           Blog
@@ -197,20 +233,34 @@ const Header = () => {
       <Divider />
       <List sx={{ px: 1.5, py: 1 }}>
         {isHome &&
-          navItems.map((item) => (
-            <ListItem key={item.id} disablePadding sx={{ mb: 0.5 }}>
-              <ListItemButton
-                onClick={() => handleScrollTo(item.id)}
-                sx={{
-                  borderRadius: 1.5,
-                  '&:hover': { backgroundColor: 'action.hover' },
-                }}
-              >
-                <ListItemIcon sx={{ minWidth: 40, color: 'text.secondary' }}>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.label} primaryTypographyProps={{ fontWeight: 500 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          navItems.map((item) => {
+            const isActive = activeSection === item.id;
+            return (
+              <ListItem key={item.id} disablePadding sx={{ mb: 0.5 }}>
+                <ListItemButton
+                  onClick={() => handleScrollTo(item.id)}
+                  sx={{
+                    borderRadius: 1.5,
+                    backgroundColor: isActive ? 'action.selected' : 'transparent',
+                    '&:hover': { backgroundColor: 'action.hover' },
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 40,
+                      color: isActive ? 'text.primary' : 'text.secondary',
+                    }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.label}
+                    primaryTypographyProps={{ fontWeight: isActive ? 600 : 500 }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
         <ListItem disablePadding sx={{ mb: 0.5 }}>
           <ListItemButton
             component={Link}
@@ -291,11 +341,12 @@ const Header = () => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            minHeight: { xs: 64, sm: 72 },
+            minHeight: scrolled ? 64 : { xs: 64, sm: 72 },
             maxWidth: 1200,
             mx: 'auto',
             width: '100%',
             px: { xs: 2, sm: 3 },
+            transition: 'min-height 0.2s ease',
           }}
         >
           <Box

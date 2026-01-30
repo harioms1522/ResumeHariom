@@ -12,14 +12,42 @@ function App() {
     <CustomThemeProvider>
         <CssBaseline />
         <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
+          <Box
+            component="a"
+            href="#main-content"
+            sx={{
+              position: 'absolute',
+              left: -9999,
+              zIndex: 9999,
+              py: 1.5,
+              px: 2.5,
+              bgcolor: 'primary.main',
+              color: 'primary.contrastText',
+              fontWeight: 600,
+              borderRadius: '0 0 4px 0',
+              textDecoration: 'none',
+              fontSize: '0.9375rem',
+              '&:focus': { left: 0, top: 0 },
+              '&:focus-visible': { left: 0, top: 0, outline: '2px solid', outlineColor: 'primary.dark', outlineOffset: 2 },
+            }}
+          >
+            Skip to main content
+          </Box>
           <Header />
-          <Routes>
+          <Box
+            component="main"
+            id="main-content"
+            tabIndex={-1}
+            sx={{ outline: 'none' }}
+          >
+            <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogDetails />} />
             {/* Uncomment the following line to enable the Home route for any other paths */}
             {/* <Route path="*" element={<Home />} /> */}
-          </Routes>
+            </Routes>
+          </Box>
         </Box>
     </CustomThemeProvider>
   );
