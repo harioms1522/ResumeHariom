@@ -1,0 +1,44 @@
+[
+  {
+    "title": "E-commerce Microservices Platform",
+    "description": "Designed and implemented a scalable e-commerce platform using microservices architecture. Handles 100k+ daily transactions with 99.9% uptime.",
+    "technologies": ["Node.js", "MongoDB", "Redis", "Docker", "Kubernetes", "AWS"],
+    "highlights": [
+      "Implemented distributed caching system",
+      "Built real-time inventory management",
+      "Developed order processing pipeline"
+    ],
+    "links": [
+      { "label": "Repo", "url": "#" },
+      { "label": "Live", "url": "#" }
+    ]
+  },
+  {
+    "title": "Financial Data Processing System",
+    "description": "Created a high-performance system for processing and analyzing financial data in real-time. Processes 1M+ records per second.",
+    "technologies": ["Python", "PostgreSQL", "Apache Kafka", "Elasticsearch", "GCP"],
+    "highlights": [
+      "Real-time data processing pipeline",
+      "Advanced analytics engine",
+      "Automated reporting system"
+    ],
+    "links": [
+      { "label": "Repo", "url": "#" },
+      { "label": "Docs", "url": "#" }
+    ]
+  },
+  {
+    "title": "API Gateway & Authentication Service",
+    "description": "Developed a secure and scalable API gateway with centralized authentication. Serves 50+ microservices with 99.99% availability.",
+    "technologies": ["Go", "JWT", "OAuth2", "Redis", "Prometheus", "Grafana"],
+    "highlights": [
+      "JWT-based authentication",
+      "Rate limiting and throttling",
+      "Request/Response transformation"
+    ],
+    "links": [
+      { "label": "Repo", "url": "#" },
+      { "label": "Live", "url": "#" }
+    ]
+  }
+]

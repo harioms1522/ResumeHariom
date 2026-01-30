@@ -7,6 +7,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import DownloadIcon from '@mui/icons-material/Download';
 import { useState, FormEvent, useEffect } from 'react';
 import resume from '../assets/Resume.pdf';
+import siteData from '../data/site.json';
 
 const SectionTitle = ({ children }: { children: string }) => (
   <Typography
@@ -171,17 +172,21 @@ const Contact = () => {
               Reach out on socials or email.
             </Typography>
             <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
-              <Link href="https://github.com/harioms1522" target="_blank" rel="noopener noreferrer" sx={{ color: 'text.secondary' }}>
-                <IconButton size="small" sx={{ color: 'inherit', '&:hover': { color: 'text.primary' } }}>
-                  <GitHubIcon />
-                </IconButton>
-              </Link>
-              <Link href="https://linkedin.com/in/harioms152" target="_blank" rel="noopener noreferrer" sx={{ color: 'text.secondary' }}>
-                <IconButton size="small" sx={{ color: 'inherit', '&:hover': { color: 'text.primary' } }}>
-                  <LinkedInIcon />
-                </IconButton>
-              </Link>
-              <Link href="mailto:harioms1522@gmail.com" sx={{ color: 'text.secondary' }}>
+              {siteData.social.github && (
+                <Link href={siteData.social.github} target="_blank" rel="noopener noreferrer" sx={{ color: 'text.secondary' }}>
+                  <IconButton size="small" sx={{ color: 'inherit', '&:hover': { color: 'text.primary' } }}>
+                    <GitHubIcon />
+                  </IconButton>
+                </Link>
+              )}
+              {siteData.social.linkedin && (
+                <Link href={siteData.social.linkedin} target="_blank" rel="noopener noreferrer" sx={{ color: 'text.secondary' }}>
+                  <IconButton size="small" sx={{ color: 'inherit', '&:hover': { color: 'text.primary' } }}>
+                    <LinkedInIcon />
+                  </IconButton>
+                </Link>
+              )}
+              <Link href={`mailto:${siteData.email}`} sx={{ color: 'text.secondary' }}>
                 <IconButton size="small" sx={{ color: 'inherit', '&:hover': { color: 'text.primary' } }}>
                   <EmailIcon />
                 </IconButton>

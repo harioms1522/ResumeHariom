@@ -4,8 +4,11 @@ import Header from './components/Header';
 import { CustomThemeProvider } from './context/ThemeContext';
 import Home from './pages/Home';
 import Blog from './pages/blog/Blog';
-import { Routes, Route } from 'react-router-dom';
 import BlogDetails from './pages/blog/BlogDetails';
+import BlogTag from './pages/blog/BlogTag';
+import ProjectsPage from './pages/ProjectsPage';
+import { Routes, Route } from 'react-router-dom';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
@@ -41,11 +44,12 @@ function App() {
             sx={{ outline: 'none' }}
           >
             <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogDetails />} />
-            {/* Uncomment the following line to enable the Home route for any other paths */}
-            {/* <Route path="*" element={<Home />} /> */}
+              <Route path="/" element={<Home />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/tag/:tag" element={<BlogTag />} />
+              <Route path="/blog/:slug" element={<BlogDetails />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Box>
         </Box>

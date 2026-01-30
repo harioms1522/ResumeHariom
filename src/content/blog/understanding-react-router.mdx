@@ -1,0 +1,35 @@
+---
+title: Understanding React Router
+slug: understanding-react-router
+date: 2024-03-15
+author: Hariom Sharma
+tags: [React, JavaScript, Routing, SPA]
+type: blog
+description: React Router is a powerful library for managing navigation and routing in React applications. Explore key concepts, setup, and best practices.
+readTime: 5 min read
+published: true
+---
+
+import { Typography, Box } from '@mui/material';
+import CodeBlock from '../../components/CodeBlock';
+
+<Typography variant="body1" color="text.secondary" gutterBottom>
+  React Router is a powerful library for managing navigation and routing in React applications. It allows developers to create single-page applications (SPAs) with dynamic routing capabilities, enabling seamless transitions between different views without full page reloads.
+  This article will explore the key concepts and features of React Router, including how to set up routes, navigate between them, and manage application state effectively.
+</Typography>
+
+## Reasons to Use React Router
+
+1. **Single Page Applications (SPAs)**: React Router is designed for SPAs, allowing developers to create dynamic and responsive user interfaces without full page reloads.
+2. **Declarative Routing**: React Router uses a declarative approach to define routes, making it easy to understand and maintain.
+3. **Nested Routing**: React Router supports nested routes, enabling developers to create complex layouts with multiple levels of routing.
+4. **Dynamic Routing**: React Router allows for dynamic routing, meaning routes can be defined based on application state or user interactions.
+5. **Route Parameters**: React Router supports route parameters, allowing developers to pass data through the URL.
+6. **History Management**: React Router provides built-in history management for back and forward navigation.
+7. **Code Splitting**: React Router supports code splitting for improved performance.
+8. **Community and Ecosystem**: React Router has a large and active community with extensive documentation.
+
+### Example
+
+<CodeBlock language="jsx" code={`import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';`} />

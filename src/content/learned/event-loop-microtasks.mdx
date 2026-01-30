@@ -1,0 +1,14 @@
+---
+title: Microtasks run before next macrotask
+slug: learned-event-loop-microtasks
+date: 2024-04-02
+author: Hariom Sharma
+tags: [JavaScript, Node.js, Performance]
+type: learned
+description: In the browser and Node.js, all queued microtasks (e.g. Promise callbacks) run to completion before the next macrotask (e.g. setTimeout) runs.
+published: true
+---
+
+- Microtasks: Promise.then, queueMicrotask, process.nextTick (Node)
+- Macrotasks: setTimeout, setImmediate, I/O
+- One macrotask → run all microtasks → next macrotask. Useful for predicting order in async code.

@@ -1,6 +1,10 @@
+import React from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { Typography, Box, Alert, Chip, Divider, Paper } from "@mui/material";
 import CodeBlock from "../components/CodeBlock";
+import CodeSandbox from "../components/CodeSandbox";
+import StackBlitz from "../components/StackBlitz";
+import RunnableSnippet from "../components/RunnableSnippet";
 
 const MyCustomProvider = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -35,21 +39,35 @@ const MyCustomProvider = ({ children }: { children: React.ReactNode }) => {
                 />
             ),
             
-            // Enhanced code components
-            code: (props: any) => (
-                <Box 
-                    sx={{ 
-                        bgcolor: 'grey.100', 
-                        px: 1, 
-                        py: 0.5, 
-                        borderRadius: 1,
-                        fontFamily: 'monospace',
-                        fontSize: '0.875rem'
-                    }} 
-                    {...props} 
-                />
-            ),
-            pre: (props: any) => <Box sx={{ mb: 2 }} {...props} />,
+            // Enhanced code components: inline code
+            code: (props: any) => {
+                const isBlock = props.className?.startsWith('language-');
+                if (isBlock) return null;
+                return (
+                    <Box
+                        sx={{
+                            bgcolor: 'grey.100',
+                            px: 1,
+                            py: 0.5,
+                            borderRadius: 1,
+                            fontFamily: 'monospace',
+                            fontSize: '0.875rem'
+                        }}
+                        {...props}
+                    />
+                );
+            },
+            pre: (props: any) => {
+                const child = React.Children.toArray(props.children)?.[0];
+                if (React.isValidElement(child) && child.type === 'code') {
+                    const className = (child.props as { className?: string }).className ?? '';
+                    const lang = className.replace(/^language-/, '') || 'text';
+                    const code = (child.props as { children?: string }).children;
+                    const codeStr = typeof code === 'string' ? code : (Array.isArray(code) ? code.join('') : String(code ?? ''));
+                    return <CodeBlock code={codeStr} language={lang} showLineNumbers />;
+                }
+                return <Box component="pre" sx={{ mb: 2 }} {...props} />;
+            },
             
             // Enhanced table components
             table: (props: any) => (
@@ -77,7 +95,10 @@ const MyCustomProvider = ({ children }: { children: React.ReactNode }) => {
             Alert,
             Chip,
             Divider,
-            CodeBlock
+            CodeBlock,
+            CodeSandbox,
+            StackBlitz,
+            RunnableSnippet,
         }}>
             {children}
         </MDXProvider>

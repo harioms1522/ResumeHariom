@@ -1,39 +1,22 @@
-import { Box, Typography, Grid, Paper, Chip } from '@mui/material';
+import { Box, Typography, Grid, Paper, Chip, Link, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import projectsData from '../data/projects.json';
 
-const projects = [
-  {
-    title: 'E-commerce Microservices Platform',
-    description: 'Designed and implemented a scalable e-commerce platform using microservices architecture. Handles 100k+ daily transactions with 99.9% uptime.',
-    technologies: ['Node.js', 'MongoDB', 'Redis', 'Docker', 'Kubernetes', 'AWS'],
-    highlights: [
-      'Implemented distributed caching system',
-      'Built real-time inventory management',
-      'Developed order processing pipeline',
-    ],
-  },
-  {
-    title: 'Financial Data Processing System',
-    description: 'Created a high-performance system for processing and analyzing financial data in real-time. Processes 1M+ records per second.',
-    technologies: ['Python', 'PostgreSQL', 'Apache Kafka', 'Elasticsearch', 'GCP'],
-    highlights: [
-      'Real-time data processing pipeline',
-      'Advanced analytics engine',
-      'Automated reporting system',
-    ],
-  },
-  {
-    title: 'API Gateway & Authentication Service',
-    description: 'Developed a secure and scalable API gateway with centralized authentication. Serves 50+ microservices with 99.99% availability.',
-    technologies: ['Go', 'JWT', 'OAuth2', 'Redis', 'Prometheus', 'Grafana'],
-    highlights: [
-      'JWT-based authentication',
-      'Rate limiting and throttling',
-      'Request/Response transformation',
-    ],
-  },
-];
+interface ProjectLink {
+  label: string;
+  url: string;
+}
+
+interface Project {
+  title: string;
+  description: string;
+  technologies: string[];
+  highlights: string[];
+  links?: ProjectLink[];
+}
+
+const projects: Project[] = projectsData as Project[];
 
 const Projects = () => {
   const [ref, inView] = useInView({
@@ -120,7 +103,7 @@ const Projects = () => {
                   </Typography>
                 ))}
               </Box>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: project.links?.length ? 2 : 0 }}>
                 {project.technologies.map((tech, techIndex) => (
                   <Chip
                     key={techIndex}
@@ -139,6 +122,24 @@ const Projects = () => {
                   />
                 ))}
               </Box>
+              {project.links && project.links.length > 0 && (
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                  {project.links.map((link, linkIndex) => (
+                    <Button
+                      key={linkIndex}
+                      component={Link}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      size="small"
+                      variant="outlined"
+                      sx={{ textTransform: 'none' }}
+                    >
+                      {link.label}
+                    </Button>
+                  ))}
+                </Box>
+              )}
             </Paper>
           </Grid>
         ))}

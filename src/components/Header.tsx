@@ -19,6 +19,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import DownloadIcon from '@mui/icons-material/Download';
 import BlogIcon from '@mui/icons-material/Article';
+import FolderIcon from '@mui/icons-material/Folder';
 import PersonIcon from '@mui/icons-material/Person';
 import WorkIcon from '@mui/icons-material/Work';
 import CodeIcon from '@mui/icons-material/Code';
@@ -165,6 +166,15 @@ const Header = () => {
           Blog
         </Button>
       </Link>
+      <Link to="/projects" style={{ textDecoration: 'none' }}>
+        <Button
+          color="inherit"
+          sx={{ ...navLinkSx(), position: 'relative' }}
+          startIcon={<FolderIcon sx={{ fontSize: '1.1rem' }} />}
+        >
+          Projects
+        </Button>
+      </Link>
       <Button
         variant="contained"
         onClick={handleDownloadResume}
@@ -277,6 +287,24 @@ const Header = () => {
               <BlogIcon />
             </ListItemIcon>
             <ListItemText primary="Blog" primaryTypographyProps={{ fontWeight: 500 }} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding sx={{ mb: 0.5 }}>
+          <ListItemButton
+            component={Link}
+            to="/projects"
+            onClick={() => setMobileOpen(false)}
+            sx={{
+              borderRadius: 1.5,
+              textDecoration: 'none',
+              color: 'inherit',
+              '&:hover': { backgroundColor: 'action.hover' },
+            }}
+          >
+            <ListItemIcon sx={{ minWidth: 40, color: 'text.secondary' }}>
+              <FolderIcon />
+            </ListItemIcon>
+            <ListItemText primary="Projects" primaryTypographyProps={{ fontWeight: 500 }} />
           </ListItemButton>
         </ListItem>
       </List>
