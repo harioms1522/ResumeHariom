@@ -1,47 +1,66 @@
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography, Chip } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-const skillCategories = [
+type Proficiency = 'Expert' | 'Advanced' | 'Proficient' | 'Familiar';
+
+const skillCategories: { title: string; skills: { name: string; proficiency: Proficiency }[] }[] = [
   {
-    title: 'Backend Development',
+    title: 'Backend',
     skills: [
-      { name: 'Go (Golang)', level: 95 },
-      { name: 'Node.js', level: 95 },
-      { name: 'Python', level: 90 },
-      { name: 'Express', level: 90 },
-      { name: 'ETL', level: 90 },
-    ],
-  },
-  {
-    title: 'Frontend Development',
-    skills: [
-      { name: 'React.js', level: 90 },
-      { name: 'Tailwind CSS', level: 50 },
-      { name: 'Bootstrap', level: 50 },
-      { name: 'jQuery', level: 80 },
+      { name: 'Node.js', proficiency: 'Expert' },
+      { name: 'Go (Golang)', proficiency: 'Advanced' },
+      { name: 'Python', proficiency: 'Advanced' },
+      { name: 'Express', proficiency: 'Advanced' },
+      { name: 'ETL', proficiency: 'Advanced' },
     ],
   },
   {
     title: 'Databases',
     skills: [
-      { name: 'MongoDB', level: 95 },
-      { name: 'MongoDB DBA', level: 95 },
-      { name: 'MySQL', level: 90 },
-      { name: 'AWS Redshift', level: 75 },
+      { name: 'MongoDB', proficiency: 'Expert' },
+      { name: 'MongoDB DBA', proficiency: 'Expert' },
+      { name: 'MySQL', proficiency: 'Advanced' },
+      { name: 'AWS Redshift', proficiency: 'Proficient' },
     ],
   },
   {
     title: 'Cloud & DevOps',
     skills: [
-      { name: 'AWS', level: 90 },
-      { name: 'Docker', level: 95 },
-      { name: 'Kubernetes (K8s)', level: 95 },
-      { name: 'K8s for Microservices', level: 95 },
-      { name: 'CI/CD', level: 90 },
+      { name: 'Docker', proficiency: 'Advanced' },
+      { name: 'Kubernetes (K8s)', proficiency: 'Proficient' },
+      { name: 'K8s for Microservices', proficiency: 'Proficient' },
+      { name: 'AWS', proficiency: 'Advanced' },
+      { name: 'CI/CD', proficiency: 'Advanced' },
+      // { name: 'Terraform', proficiency: 'Proficient' },
+      { name: 'EKS', proficiency: 'Proficient' },
+    ],
+  },
+  {
+    title: 'Frontend',
+    skills: [
+      { name: 'React.js', proficiency: 'Proficient' },
+      { name: 'jQuery', proficiency: 'Familiar' },
+      { name: 'Tailwind CSS', proficiency: 'Proficient' },
+      { name: 'Bootstrap', proficiency: 'Familiar' },
     ],
   },
 ];
+
+const proficiencyColor = (proficiency: Proficiency) => {
+  switch (proficiency) {
+    case 'Expert':
+      return { color: 'text.primary', fontWeight: 600 };
+    case 'Advanced':
+      return { color: 'text.secondary' };
+    case 'Proficient':
+      return { color: 'text.secondary' };
+    case 'Familiar':
+      return { color: 'text.disabled' };
+    default:
+      return { color: 'text.secondary' };
+  }
+};
 
 const SectionTitle = ({ children }: { children: string }) => (
   <Typography
@@ -78,74 +97,80 @@ const Skills = () => {
       id="skills"
     >
       <SectionTitle>Skills</SectionTitle>
-      <Grid container spacing={{ xs: 3, sm: 4 }}>
+
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: { xs: 3, sm: 4 },
+        }}
+      >
         {skillCategories.map((category, categoryIndex) => (
-          <Grid item xs={12} sm={6} md={3} key={categoryIndex}>
-            <Box
-              component={motion.div}
-              initial={{ opacity: 0, y: 12 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.1 + categoryIndex * 0.1 }}
+          <Box key={categoryIndex}>
+            <Typography
+              variant="subtitle2"
               sx={{
-                p: 2,
-                backgroundColor: 'background.paper',
-                borderRadius: 2,
-                border: 1,
-                borderColor: 'divider',
-                height: '100%',
+                fontWeight: 600,
+                color: 'text.secondary',
+                mb: 1.5,
+                fontSize: '0.8125rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.06em',
               }}
             >
-              <Typography
-                variant="subtitle1"
-                sx={{
-                  fontWeight: 600,
-                  color: 'text.primary',
-                  mb: 2,
-                  fontSize: '1rem',
-                }}
-              >
-                {category.title}
-              </Typography>
+              {category.title}
+            </Typography>
+            <Box
+              component={motion.div}
+              initial={{ opacity: 0, y: 8 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.05 + categoryIndex * 0.08 }}
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: 1.5,
+              }}
+            >
               {category.skills.map((skill, skillIndex) => (
-                <Box key={skillIndex} sx={{ mb: 1.5 }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                    <Typography variant="body2" sx={{ fontSize: '0.875rem' }}>
-                      {skill.name}
-                    </Typography>
-                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
-                      {skill.level}%
-                    </Typography>
-                  </Box>
-                  <Box
+                <Box
+                  key={skillIndex}
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                    gap: 0.25,
+                  }}
+                >
+                  <Chip
+                    label={skill.name}
+                    size="small"
+                    variant="outlined"
                     sx={{
-                      width: '100%',
-                      height: 6,
-                      backgroundColor: 'action.hover',
-                      borderRadius: 1,
-                      overflow: 'hidden',
+                      fontWeight: 500,
+                      fontSize: '0.8125rem',
+                      borderColor: 'divider',
+                      color: 'text.primary',
+                      '&:hover': {
+                        borderColor: 'text.secondary',
+                        backgroundColor: 'action.hover',
+                      },
+                    }}
+                  />
+                  {/* <Typography
+                    variant="caption"
+                    sx={{
+                      fontSize: '0.6875rem',
+                      ...proficiencyColor(skill.proficiency),
                     }}
                   >
-                    <Box
-                      component={motion.div}
-                      initial={{ width: 0 }}
-                      animate={inView ? { width: `${skill.level}%` } : {}}
-                      transition={{
-                        duration: 0.8,
-                        delay: 0.2 + categoryIndex * 0.1 + skillIndex * 0.05,
-                      }}
-                      sx={{
-                        height: '100%',
-                        backgroundColor: 'text.secondary',
-                        borderRadius: 1,
-                      }}
-                    />
-                  </Box>
+                    {skill.proficiency}
+                  </Typography> */}
                 </Box>
               ))}
             </Box>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 };
