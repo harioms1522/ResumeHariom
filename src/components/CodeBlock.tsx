@@ -5,6 +5,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { ThemeContext } from "../context/ThemeContext";
 import { useContext, useState } from "react";
+import { getActiveTheme } from "../config/themeConfig";
 
 type CodeBlockProps = {
     code: string;
@@ -14,6 +15,7 @@ type CodeBlockProps = {
 
 const CodeBlock: React.FC<CodeBlockProps> = ({ code, language, showLineNumbers = true }) => {
     const themeCtx = useContext(ThemeContext) as { themeMode: 'light' | 'dark'; toggleTheme: () => void };
+    const activeTheme = getActiveTheme();
 
     const theme = themeCtx.themeMode === 'dark' ? themes.gruvboxMaterialDark : themes.gruvboxMaterialLight;
 
@@ -25,6 +27,15 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, language, showLineNumbers =
         setTimeout(() => setCopied(false), 2000);
     };
 
+    const isDark = themeCtx.themeMode === 'dark';
+    const bgColor = isDark ? activeTheme.dark.backgroundPaper : activeTheme.light.backgroundDefault;
+    const iconColor = isDark ? activeTheme.dark.primary : activeTheme.light.primary;
+    const borderColor = isDark 
+        ? `${activeTheme.dark.primary}33` // 20% opacity
+        : `${activeTheme.light.primary}33`;
+    const lineNumberColor = isDark
+        ? `${activeTheme.dark.textSecondary}99` // 60% opacity
+        : `${activeTheme.light.textSecondary}99`;
 
     return (
         <Box
@@ -33,13 +44,13 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, language, showLineNumbers =
                 my: 3,
                 borderRadius: 2,
                 overflow: "hidden",
-                bgcolor: "#1e1e1e",
+                bgcolor: bgColor,
             }}
         >
             {/* Copy Button */}
             <Box sx={{ position: "absolute", top: 8, right: 8 }}>
                 <Tooltip title={copied ? "Copied!" : "Copy"}>
-                    <IconButton onClick={handleCopy} size="small" sx={{ color: "white" }}>
+                    <IconButton onClick={handleCopy} size="small" sx={{ color: iconColor }}>
                         {copied ? <CheckIcon fontSize="small" /> : <ContentCopyIcon fontSize="small" />}
                     </IconButton>
                 </Tooltip>
@@ -71,13 +82,13 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, language, showLineNumbers =
                                     width: "2.5em",
                                     padding: "16px 0",
                                     borderRight: "1px solid",
-                                    borderColor: "rgba(255,255,255,0.15)",
+                                    borderColor: borderColor,
                                     textAlign: "right",
                                     userSelect: "none",
                                     fontFamily: "monospace",
                                     fontSize: "0.9em",
                                     lineHeight: 1.5,
-                                    color: "rgba(255,255,255,0.5)",
+                                    color: lineNumberColor,
                                 }}
                             >
                                 {tokens.map((_, i) => (

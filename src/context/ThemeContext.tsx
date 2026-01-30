@@ -1,5 +1,6 @@
 import { createContext, useState, useMemo, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { getActiveTheme } from '../config/themeConfig';
 
 export const ThemeContext = createContext({});
 
@@ -7,22 +8,25 @@ import { ReactNode } from 'react';
 
 const fontFamily = '"Plus Jakarta Sans", "Roboto", "Helvetica", "Arial", sans-serif';
 
+// Get the active theme configuration
+const activeTheme = getActiveTheme();
+
 const lightTheme = createTheme({
     palette: {
         mode: 'light',
         primary: {
-            main: '#0f172a',
+            main: activeTheme.light.primary,
         },
         secondary: {
-            main: '#475569',
+            main: activeTheme.light.secondary,
         },
         background: {
-            default: '#fafafa',
-            paper: '#ffffff',
+            default: activeTheme.light.backgroundDefault,
+            paper: activeTheme.light.backgroundPaper,
         },
         text: {
-            primary: '#0f172a',
-            secondary: '#475569',
+            primary: activeTheme.light.textPrimary,
+            secondary: activeTheme.light.textSecondary,
         },
     },
     typography: {
@@ -49,7 +53,7 @@ const lightTheme = createTheme({
         MuiPaper: {
             styleOverrides: {
                 root: {
-                    boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+                    boxShadow: `0 1px 3px ${activeTheme.light.shadowColor}`,
                 },
             },
         },
@@ -60,18 +64,18 @@ const darkTheme = createTheme({
     palette: {
         mode: 'dark',
         primary: {
-            main: '#f1f5f9',
+            main: activeTheme.dark.primary,
         },
         secondary: {
-            main: '#94a3b8',
+            main: activeTheme.dark.secondary,
         },
         background: {
-            default: '#0f172a',
-            paper: '#1e293b',
+            default: activeTheme.dark.backgroundDefault,
+            paper: activeTheme.dark.backgroundPaper,
         },
         text: {
-            primary: '#f1f5f9',
-            secondary: '#94a3b8',
+            primary: activeTheme.dark.textPrimary,
+            secondary: activeTheme.dark.textSecondary,
         },
     },
     typography: {
@@ -98,7 +102,7 @@ const darkTheme = createTheme({
         MuiPaper: {
             styleOverrides: {
                 root: {
-                    boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+                    boxShadow: `0 1px 3px ${activeTheme.dark.shadowColor}`,
                 },
             },
         },

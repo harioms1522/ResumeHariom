@@ -9,8 +9,21 @@ import BlogTag from './pages/blog/BlogTag';
 import ProjectsPage from './pages/ProjectsPage';
 import { Routes, Route } from 'react-router-dom';
 import NotFound from './components/NotFound';
+import { useEffect } from 'react';
+import { getScrollbarColors } from './config/themeConfig';
 
 function App() {
+  // Inject scrollbar CSS variables
+  useEffect(() => {
+    const darkColors = getScrollbarColors('dark');
+    const lightColors = getScrollbarColors('light');
+    
+    document.documentElement.style.setProperty('--scrollbar-track', darkColors.track);
+    document.documentElement.style.setProperty('--scrollbar-thumb', darkColors.thumb);
+    document.documentElement.style.setProperty('--scrollbar-track-light', lightColors.track);
+    document.documentElement.style.setProperty('--scrollbar-thumb-light', lightColors.thumb);
+  }, []);
+
   return (
     <CustomThemeProvider>
         <CssBaseline />

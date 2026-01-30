@@ -19,24 +19,25 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Scrollbar styles are dynamically injected by the theme system */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: var(--scrollbar-thumb);
   border-radius: 4px;
 }
 
 @media (prefers-color-scheme: light) {
   ::-webkit-scrollbar-track {
-    background: #f1f5f9;
+    background: var(--scrollbar-track-light);
   }
   ::-webkit-scrollbar-thumb {
-    background: #94a3b8;
+    background: var(--scrollbar-thumb-light);
   }
 }

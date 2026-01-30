@@ -7,8 +7,11 @@ import Contact from "../components/Contact"
 import { Helmet } from "react-helmet-async"
 import { Box } from "@mui/system"
 import { motion } from "framer-motion"
+import { getActiveTheme } from "../config/themeConfig"
 
 const Home = () => {
+    const theme = getActiveTheme();
+    
     return (
         <>
             <Helmet>
@@ -18,7 +21,7 @@ const Home = () => {
                 <meta name="keywords" content="Resume, Portfolio, Hariom Sharma, Web Developer" />
                 <meta name="author" content="Hariom Sharma" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <meta name="theme-color" content="#1976d2" />
+                <meta name="theme-color" content={theme.meta.themeColor} />
                 <meta property="og:title" content="Resume - Hariom Sharma" />
                 <meta property="og:description" content="Hriom Sharma's Resume" />
                 <meta property="og:image" content="https://example.com/image.jpg" />

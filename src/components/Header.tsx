@@ -28,6 +28,7 @@ import { ThemeContext } from '../context/ThemeContext';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import { Link } from 'react-router-dom';
+import { getBackdropColor } from '../config/themeConfig';
 
 import resumeLogoNavBar from '../assets/images/logo_navbar_ready.png';
 import resume from '../assets/Resume.pdf';
@@ -383,9 +384,7 @@ const Header = () => {
           backgroundColor: (theme) =>
             isHome && !scrolled
               ? 'transparent'
-              : theme.palette.mode === 'dark'
-                ? 'rgba(15, 23, 42, 0.82)'
-                : 'rgba(255, 255, 255, 0.82)',
+              : getBackdropColor(theme.palette.mode as 'light' | 'dark'),
           backdropFilter: isHome && !scrolled ? 'none' : 'blur(12px)',
           WebkitBackdropFilter: isHome && !scrolled ? 'none' : 'blur(12px)',
           color: 'text.primary',

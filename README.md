@@ -55,6 +55,27 @@ _June 2021 – June 2022_
 
 ---
 
+## 🎨 Theme System
+
+This website features a powerful single-line theme system! Change the entire color scheme by editing just one line of code.
+
+**Quick Theme Switch:**
+1. Open `src/config/themeConfig.ts`
+2. Change line 209: `export const ACTIVE_THEME = 'themeName'`
+3. Save and refresh!
+
+**Available Themes:**
+- `matrixGreen` - Tech-savvy emerald green (current)
+- `cyberpunkPurple` - Futuristic purple & cyan
+- `oceanBlue` - Professional modern blue
+- `sunsetGradient` - Warm creative orange/pink
+- `neonMulti` - Bold multicolor neon
+- `slate` - Classic professional gray
+
+📚 See [QUICKSTART_THEMES.md](./QUICKSTART_THEMES.md) for detailed instructions.
+
+---
+
 ## Contact
 
 - **Email:** harioms1522@gmail.com
