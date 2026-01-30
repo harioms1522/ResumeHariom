@@ -1,9 +1,28 @@
 import { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AppBar, Toolbar, Button, Box, IconButton, Menu, MenuItem } from '@mui/material';
+import { useNavigate, useLocation } from 'react-router-dom';
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Box,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  Typography,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import DownloadIcon from '@mui/icons-material/Download';
 import BlogIcon from '@mui/icons-material/Article';
+import PersonIcon from '@mui/icons-material/Person';
+import WorkIcon from '@mui/icons-material/Work';
+import CodeIcon from '@mui/icons-material/Code';
+import MailIcon from '@mui/icons-material/Mail';
 import { ThemeContext } from '../context/ThemeContext';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -12,26 +31,29 @@ import { Link } from 'react-router-dom';
 import resumeLogoNavBar from '../assets/images/logo_navbar_ready.png';
 import resume from '../assets/Resume.pdf';
 
-const navItems = ['About', 'Experience', 'Skills', 'Contact'];
+const navItems = [
+  { label: 'About', id: 'about', icon: <PersonIcon /> },
+  { label: 'Experience', id: 'experience', icon: <WorkIcon /> },
+  { label: 'Skills', id: 'skills', icon: <CodeIcon /> },
+  { label: 'Contact', id: 'contact', icon: <MailIcon /> },
+];
+
+const drawerWidth = 280;
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const themeCtx = useContext(ThemeContext) as { themeMode: 'light' | 'dark'; toggleTheme: () => void };
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [scrollTarget, setScrollTarget] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
 
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const isHome = location.pathname === '/';
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleScroll = (section: string) => {
-    setScrollTarget(section.toLowerCase());
-    handleClose();
+  const handleScrollTo = (id: string) => {
+    setScrollTarget(id);
+    setMobileOpen(false);
   };
 
   const handleDownloadResume = () => {
@@ -41,6 +63,7 @@ const Header = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    setMobileOpen(false);
   };
 
   useEffect(() => {
@@ -53,174 +76,271 @@ const Header = () => {
     }
   }, [scrollTarget]);
 
-  return (
-    <AppBar
-      position="sticky"
-      elevation={0}
-      sx={{
-        backgroundColor: 'background.paper',
-        color: 'text.primary',
-        borderBottom: 1,
-        borderColor: 'divider',
-      }}
-    >
-      <Toolbar
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const navLinkSx = {
+    textTransform: 'none',
+    fontWeight: 500,
+    fontSize: '0.9375rem',
+    color: 'text.secondary',
+    px: 1.5,
+    py: 0.75,
+    borderRadius: 1,
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      bottom: 0,
+      left: '50%',
+      width: 0,
+      height: 2,
+      bgcolor: 'text.primary',
+      transition: 'width 0.2s ease, left 0.2s ease',
+    },
+    '&:hover': {
+      color: 'text.primary',
+      backgroundColor: 'action.hover',
+      '&::after': { width: '100%', left: 0 },
+    },
+  };
+
+  const desktopNav = (
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+      {isHome &&
+        navItems.map((item) => (
+          <Button
+            key={item.id}
+            color="inherit"
+            onClick={() => handleScrollTo(item.id)}
+            sx={{ ...navLinkSx, position: 'relative' }}
+          >
+            {item.label}
+          </Button>
+        ))}
+      <Link to="/blog" style={{ textDecoration: 'none' }}>
+        <Button
+          color="inherit"
+          sx={{ ...navLinkSx, position: 'relative' }}
+          startIcon={<BlogIcon sx={{ fontSize: '1.1rem' }} />}
+        >
+          Blog
+        </Button>
+      </Link>
+      <Button
+        variant="contained"
+        onClick={handleDownloadResume}
+        startIcon={<DownloadIcon />}
         sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          minHeight: { xs: 56, sm: 64 },
-          px: { xs: 1, sm: 2 },
+          ml: 1.5,
+          textTransform: 'none',
+          fontWeight: 600,
+          fontSize: '0.875rem',
+          px: 2,
+          py: 1,
+          borderRadius: 10,
+          boxShadow: 0,
+          backgroundColor: 'text.primary',
+          color: 'background.default',
+          '&:hover': {
+            backgroundColor: 'text.secondary',
+            boxShadow: 0,
+          },
         }}
       >
-        <Box
-          component="img"
-          src={resumeLogoNavBar}
-          alt="Hariom Sharma"
-          sx={{
-            width: { xs: 100, sm: 120 },
-            height: 'auto',
-            cursor: 'pointer',
-          }}
-          onClick={() => navigate('/')}
-        />
+        Resume
+      </Button>
+      <IconButton
+        onClick={themeCtx.toggleTheme}
+        sx={{
+          color: 'text.secondary',
+          ml: 0.5,
+          '&:hover': { color: 'text.primary', backgroundColor: 'action.hover' },
+        }}
+        aria-label="toggle theme"
+      >
+        {themeCtx.themeMode === 'dark' ? (
+          <LightModeIcon fontSize="small" />
+        ) : (
+          <DarkModeIcon fontSize="small" />
+        )}
+      </IconButton>
+    </Box>
+  );
 
-        <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center', gap: 0.5 }}>
-          {navItems.map((item) => (
-            <Button
-              key={item}
-              color="inherit"
-              onClick={() => handleScroll(item)}
-              sx={{
-                textTransform: 'none',
-                fontWeight: 500,
-                fontSize: '0.9rem',
-                color: 'text.secondary',
-                '&:hover': {
-                  color: 'text.primary',
-                  backgroundColor: 'action.hover',
-                },
-              }}
-            >
-              {item}
-            </Button>
+  const mobileDrawer = (
+    <Drawer
+      variant="temporary"
+      anchor="right"
+      open={mobileOpen}
+      onClose={() => setMobileOpen(false)}
+      ModalProps={{ keepMounted: true }}
+      PaperProps={{
+        sx: {
+          width: drawerWidth,
+          backgroundColor: 'background.paper',
+          borderLeft: 1,
+          borderColor: 'divider',
+        },
+      }}
+    >
+      <Box sx={{ py: 2, px: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Typography component="span" variant="subtitle1" fontWeight={600}>
+          Menu
+        </Typography>
+        <IconButton onClick={() => setMobileOpen(false)} aria-label="close menu" size="small">
+          <CloseIcon />
+        </IconButton>
+      </Box>
+      <Divider />
+      <List sx={{ px: 1.5, py: 1 }}>
+        {isHome &&
+          navItems.map((item) => (
+            <ListItem key={item.id} disablePadding sx={{ mb: 0.5 }}>
+              <ListItemButton
+                onClick={() => handleScrollTo(item.id)}
+                sx={{
+                  borderRadius: 1.5,
+                  '&:hover': { backgroundColor: 'action.hover' },
+                }}
+              >
+                <ListItemIcon sx={{ minWidth: 40, color: 'text.secondary' }}>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.label} primaryTypographyProps={{ fontWeight: 500 }} />
+              </ListItemButton>
+            </ListItem>
           ))}
-          <Link to="/blog" style={{ textDecoration: 'none' }}>
-            <Button
-              color="inherit"
-              startIcon={<BlogIcon sx={{ fontSize: '1.1rem' }} />}
-              sx={{
-                textTransform: 'none',
-                fontWeight: 500,
-                fontSize: '0.9rem',
-                color: 'text.secondary',
-                '&:hover': {
-                  color: 'text.primary',
-                  backgroundColor: 'action.hover',
-                },
-              }}
-            >
-              Blog
-            </Button>
-          </Link>
-          <Button
-            variant="contained"
-            size="small"
-            startIcon={<DownloadIcon />}
-            onClick={handleDownloadResume}
+        <ListItem disablePadding sx={{ mb: 0.5 }}>
+          <ListItemButton
+            component={Link}
+            to="/blog"
+            onClick={() => setMobileOpen(false)}
             sx={{
-              ml: 1,
-              textTransform: 'none',
-              fontWeight: 600,
-              fontSize: '0.875rem',
-              backgroundColor: 'text.primary',
-              color: 'background.default',
-              '&:hover': {
-                backgroundColor: 'text.secondary',
-              },
+              borderRadius: 1.5,
+              textDecoration: 'none',
+              color: 'inherit',
+              '&:hover': { backgroundColor: 'action.hover' },
             }}
           >
-            Resume
-          </Button>
-          <IconButton
-            size="small"
-            onClick={themeCtx.toggleTheme}
-            sx={{ color: 'text.secondary', ml: 0.5 }}
-            aria-label="toggle theme"
-          >
-            {themeCtx.themeMode === 'dark' ? (
-              <LightModeIcon fontSize="small" />
-            ) : (
-              <DarkModeIcon fontSize="small" />
-            )}
-          </IconButton>
-        </Box>
+            <ListItemIcon sx={{ minWidth: 40, color: 'text.secondary' }}>
+              <BlogIcon />
+            </ListItemIcon>
+            <ListItemText primary="Blog" primaryTypographyProps={{ fontWeight: 500 }} />
+          </ListItemButton>
+        </ListItem>
+      </List>
+      <Divider sx={{ my: 1 }} />
+      <Box sx={{ px: 2, py: 2 }}>
+        <Button
+          fullWidth
+          variant="contained"
+          startIcon={<DownloadIcon />}
+          onClick={handleDownloadResume}
+          sx={{
+            textTransform: 'none',
+            fontWeight: 600,
+            py: 1.25,
+            borderRadius: 2,
+            backgroundColor: 'text.primary',
+            color: 'background.default',
+            '&:hover': { backgroundColor: 'text.secondary' },
+          }}
+        >
+          Download Resume
+        </Button>
+        <IconButton
+          onClick={themeCtx.toggleTheme}
+          sx={{
+            mt: 2,
+            color: 'text.secondary',
+            border: 1,
+            borderColor: 'divider',
+            '&:hover': { color: 'text.primary', borderColor: 'text.secondary' },
+          }}
+          aria-label="toggle theme"
+        >
+          {themeCtx.themeMode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
+        </IconButton>
+      </Box>
+    </Drawer>
+  );
 
-        <Box sx={{ display: { xs: 'flex', sm: 'none' }, alignItems: 'center', gap: 0.5 }}>
-          <IconButton
-            size="small"
-            onClick={themeCtx.toggleTheme}
-            sx={{ color: 'text.secondary' }}
-            aria-label="toggle theme"
-          >
-            {themeCtx.themeMode === 'dark' ? (
-              <LightModeIcon fontSize="small" />
-            ) : (
-              <DarkModeIcon fontSize="small" />
-            )}
-          </IconButton>
-          <IconButton
-            size="large"
-            edge="end"
-            color="inherit"
-            aria-label="menu"
-            onClick={handleMenu}
-            sx={{ color: 'text.primary' }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-            PaperProps={{
-              sx: {
-                backgroundColor: 'background.paper',
-                color: 'text.primary',
-                mt: 1.5,
-                minWidth: 200,
-                boxShadow: 2,
-                '& .MuiMenuItem-root': {
-                  fontSize: '0.95rem',
-                  '&:hover': {
-                    backgroundColor: 'action.hover',
-                  },
-                },
-              },
+  return (
+    <>
+      <AppBar
+        position="sticky"
+        elevation={0}
+        sx={{
+          backgroundColor: (theme) =>
+            isHome && !scrolled
+              ? 'transparent'
+              : theme.palette.mode === 'dark'
+                ? 'rgba(15, 23, 42, 0.82)'
+                : 'rgba(255, 255, 255, 0.82)',
+          backdropFilter: isHome && !scrolled ? 'none' : 'blur(12px)',
+          WebkitBackdropFilter: isHome && !scrolled ? 'none' : 'blur(12px)',
+          color: 'text.primary',
+          borderBottom: 1,
+          borderColor: isHome && !scrolled ? 'transparent' : 'divider',
+          transition: 'background-color 0.2s ease, border-color 0.2s ease, backdrop-filter 0.2s ease',
+        }}
+      >
+        <Toolbar
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            minHeight: { xs: 64, sm: 72 },
+            maxWidth: 1200,
+            mx: 'auto',
+            width: '100%',
+            px: { xs: 2, sm: 3 },
+          }}
+        >
+          <Box
+            component="img"
+            src={resumeLogoNavBar}
+            alt="Hariom Sharma"
+            sx={{
+              width: { xs: 110, sm: 130 },
+              height: 'auto',
+              cursor: 'pointer',
+              transition: 'opacity 0.2s',
+              '&:hover': { opacity: 0.85 },
             }}
-          >
-            {navItems.map((item) => (
-              <MenuItem key={item} onClick={() => handleScroll(item)}>
-                {item}
-              </MenuItem>
-            ))}
-            <MenuItem
-              component={Link}
-              to="/blog"
-              onClick={handleClose}
-              sx={{ textDecoration: 'none', color: 'inherit' }}
+            onClick={() => navigate('/')}
+          />
+
+          <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>{desktopNav}</Box>
+
+          <Box sx={{ display: { xs: 'flex', sm: 'none' }, alignItems: 'center', gap: 0.5 }}>
+            <IconButton
+              onClick={themeCtx.toggleTheme}
+              sx={{ color: 'text.secondary', '&:hover': { color: 'text.primary' } }}
+              aria-label="toggle theme"
             >
-              <BlogIcon sx={{ mr: 1, fontSize: '1.2rem' }} />
-              Blog
-            </MenuItem>
-            <MenuItem onClick={handleDownloadResume}>
-              <DownloadIcon sx={{ mr: 1, fontSize: '1.2rem' }} />
-              Download Resume
-            </MenuItem>
-          </Menu>
-        </Box>
-      </Toolbar>
-    </AppBar>
+              {themeCtx.themeMode === 'dark' ? (
+                <LightModeIcon fontSize="small" />
+              ) : (
+                <DarkModeIcon fontSize="small" />
+              )}
+            </IconButton>
+            <IconButton
+              onClick={() => setMobileOpen(true)}
+              sx={{
+                color: 'text.primary',
+                '&:hover': { backgroundColor: 'action.hover' },
+              }}
+              aria-label="open menu"
+            >
+              <MenuIcon />
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      {mobileDrawer}
+    </>
   );
 };
 
