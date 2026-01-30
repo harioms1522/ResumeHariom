@@ -29,7 +29,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import { Link } from 'react-router-dom';
 
-import resumeLogoNavBar from '../assets/images/resume_logo.png';
+import resumeLogoNavBar from '../assets/images/logo_navbar_ready.png';
 import resume from '../assets/Resume.pdf';
 
 const SECTION_IDS = ['about', 'experience', 'skills', 'contact'] as const;
@@ -407,7 +407,7 @@ const Header = () => {
             transition: 'min-height 0.2s ease',
           }}
         >
-          <Box
+          {/* <Box
             component="img"
             src={resumeLogoNavBar}
             alt="Hariom Sharma"
@@ -419,7 +419,9 @@ const Header = () => {
               '&:hover': { opacity: 0.85 },
             }}
             onClick={() => navigate('/')}
-          />
+          /> */}
+          {/* placeholder for logo on the left */}
+          <Box sx={{ flex: 1 }} />
 
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>{desktopNav}</Box>
 
