@@ -157,6 +157,16 @@ const Header = () => {
             {item.label}
           </Button>
         ))}
+      {!isHome && (
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <Button
+            color="inherit"
+            sx={{ ...navLinkSx(), position: 'relative' }}
+          >
+            Resume
+          </Button>
+        </Link>
+      )}
       <Link to="/blog" style={{ textDecoration: 'none' }}>
         <Button
           color="inherit"
@@ -175,7 +185,7 @@ const Header = () => {
           Projects
         </Button>
       </Link>
-      <Button
+      {/* <Button
         variant="contained"
         onClick={handleDownloadResume}
         startIcon={<DownloadIcon />}
@@ -197,7 +207,7 @@ const Header = () => {
         }}
       >
         Resume
-      </Button>
+      </Button> */}
       <IconButton
         onClick={themeCtx.toggleTheme}
         sx={{
@@ -271,6 +281,26 @@ const Header = () => {
               </ListItem>
             );
           })}
+        {!isHome && (
+          <ListItem disablePadding sx={{ mb: 0.5 }}>
+            <ListItemButton
+              component={Link}
+              to="/"
+              onClick={() => setMobileOpen(false)}
+              sx={{
+                borderRadius: 1.5,
+                textDecoration: 'none',
+                color: 'inherit',
+                '&:hover': { backgroundColor: 'action.hover' },
+              }}
+            >
+              <ListItemIcon sx={{ minWidth: 40, color: 'text.secondary' }}>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary="Resume" primaryTypographyProps={{ fontWeight: 500 }} />
+            </ListItemButton>
+          </ListItem>
+        )}
         <ListItem disablePadding sx={{ mb: 0.5 }}>
           <ListItemButton
             component={Link}
@@ -310,7 +340,7 @@ const Header = () => {
       </List>
       <Divider sx={{ my: 1 }} />
       <Box sx={{ px: 2, py: 2 }}>
-        <Button
+        {/* <Button
           fullWidth
           variant="contained"
           startIcon={<DownloadIcon />}
@@ -326,7 +356,7 @@ const Header = () => {
           }}
         >
           Download Resume
-        </Button>
+        </Button> */}
         <IconButton
           onClick={themeCtx.toggleTheme}
           sx={{
