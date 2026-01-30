@@ -29,7 +29,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import { Link } from 'react-router-dom';
 
-import resumeLogoNavBar from '../assets/images/logo_navbar_ready.png';
+import resumeLogoNavBar from '../assets/images/resume_logo.png';
 import resume from '../assets/Resume.pdf';
 
 const SECTION_IDS = ['about', 'experience', 'skills', 'contact'] as const;

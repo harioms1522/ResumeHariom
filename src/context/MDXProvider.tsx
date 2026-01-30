@@ -11,8 +11,8 @@ const MyCustomProvider = ({ children }: { children: React.ReactNode }) => {
         <MDXProvider components={{
             // Enhanced typography components with Montserrat font
             h1: (props: any) => <Typography variant="h3" sx={{ mb: 3, mt: 4, fontWeight: 600, color: 'primary.main', fontFamily: '"Montserrat", "Roboto", "Helvetica", "Arial", sans-serif', letterSpacing: '-0.02em' }} {...props} />,
-            h2: (props: any) => <Typography variant="h4" sx={{ mb: 2, mt: 3, fontWeight: 600, fontFamily: '"Montserrat", "Roboto", "Helvetica", "Arial", sans-serif', letterSpacing: '-0.02em' }} {...props} />,
-            h3: (props: any) => <Typography variant="h5" sx={{ mb: 2, mt: 2, fontWeight: 600, fontFamily: '"Montserrat", "Roboto", "Helvetica", "Arial", sans-serif', letterSpacing: '-0.02em' }} {...props} />,
+            h2: (props: any) => <Typography component="h2" variant="h4" sx={{ mb: 2, mt: 3, fontWeight: 600, fontFamily: '"Montserrat", "Roboto", "Helvetica", "Arial", sans-serif', letterSpacing: '-0.02em' }} {...props} />,
+            h3: (props: any) => <Typography component="h3" variant="h5" sx={{ mb: 2, mt: 2, fontWeight: 600, fontFamily: '"Montserrat", "Roboto", "Helvetica", "Arial", sans-serif', letterSpacing: '-0.02em' }} {...props} />,
             h4: (props: any) => <Typography variant="h6" sx={{ mb: 1, mt: 2, fontWeight: 600, fontFamily: '"Montserrat", "Roboto", "Helvetica", "Arial", sans-serif', letterSpacing: '-0.02em' }} {...props} />,
             h5: (props: any) => <Typography variant="subtitle1" sx={{ mb: 1, mt: 1, fontWeight: 600, fontFamily: '"Montserrat", "Roboto", "Helvetica", "Arial", sans-serif', letterSpacing: '-0.02em' }} {...props} />,
             h6: (props: any) => <Typography variant="subtitle2" sx={{ mb: 1, mt: 1, fontWeight: 600, fontFamily: '"Montserrat", "Roboto", "Helvetica", "Arial", sans-serif', letterSpacing: '-0.02em' }} {...props} />,
