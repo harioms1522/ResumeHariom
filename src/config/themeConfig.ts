@@ -206,7 +206,7 @@ export const THEME_PALETTES: Record<string, ColorPalette> = {
  * ⚡ CHANGE THIS LINE TO SWITCH THEMES ⚡
  * Available options: 'matrixGreen', 'cyberpunkPurple', 'oceanBlue', 'sunsetGradient', 'neonMulti', 'slate'
  */
-export const ACTIVE_THEME: keyof typeof THEME_PALETTES = 'neonMulti';
+export const ACTIVE_THEME: keyof typeof THEME_PALETTES = 'matrixGreen';
 
 /**
  * Get the currently active theme palette
