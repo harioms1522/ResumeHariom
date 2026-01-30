@@ -24,6 +24,9 @@ import PersonIcon from '@mui/icons-material/Person';
 import WorkIcon from '@mui/icons-material/Work';
 import CodeIcon from '@mui/icons-material/Code';
 import MailIcon from '@mui/icons-material/Mail';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import EmailIcon from '@mui/icons-material/Email';
 import { ThemeContext } from '../context/ThemeContext';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -32,6 +35,7 @@ import { getBackdropColor } from '../config/themeConfig';
 
 import resumeLogoNavBar from '../assets/images/logo_navbar_ready.png';
 import resume from '../assets/Resume.pdf';
+import siteData from '../data/site.json';
 
 const SECTION_IDS = ['about', 'experience', 'skills', 'contact'] as const;
 
@@ -145,7 +149,7 @@ const Header = () => {
     },
   });
 
-  const desktopNav = (
+  const desktopNavLinks = (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
       {isHome &&
         navItems.map((item) => (
@@ -186,34 +190,51 @@ const Header = () => {
           Projects
         </Button>
       </Link>
-      {/* <Button
-        variant="contained"
-        onClick={handleDownloadResume}
-        startIcon={<DownloadIcon />}
-        sx={{
-          ml: 1.5,
-          textTransform: 'none',
-          fontWeight: 600,
-          fontSize: '0.875rem',
-          px: 2,
-          py: 1,
-          borderRadius: 10,
-          boxShadow: 0,
-          backgroundColor: 'text.primary',
-          color: 'background.default',
-          '&:hover': {
-            backgroundColor: 'text.secondary',
-            boxShadow: 0,
-          },
-        }}
+    </Box>
+  );
+
+  const desktopNavLeft = (
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
+      {siteData.social.github && (
+        <IconButton
+          component="a"
+          href={siteData.social.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          size="small"
+          sx={{ color: 'text.secondary', '&:hover': { color: 'text.primary', backgroundColor: 'action.hover' } }}
+          aria-label="GitHub"
+        >
+          <GitHubIcon sx={{ fontSize: '1.2rem' }} />
+        </IconButton>
+      )}
+      {siteData.social.linkedin && (
+        <IconButton
+          component="a"
+          href={siteData.social.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          size="small"
+          sx={{ color: 'text.secondary', '&:hover': { color: 'text.primary', backgroundColor: 'action.hover' } }}
+          aria-label="LinkedIn"
+        >
+          <LinkedInIcon sx={{ fontSize: '1.2rem' }} />
+        </IconButton>
+      )}
+      <IconButton
+        component="a"
+        href={`mailto:${siteData.email}`}
+        size="small"
+        sx={{ color: 'text.secondary', '&:hover': { color: 'text.primary', backgroundColor: 'action.hover' } }}
+        aria-label="Email"
       >
-        Resume
-      </Button> */}
+        <EmailIcon sx={{ fontSize: '1.2rem' }} />
+      </IconButton>
       <IconButton
         onClick={themeCtx.toggleTheme}
         sx={{
           color: 'text.secondary',
-          ml: 0.5,
+          ml: 0.25,
           '&:hover': { color: 'text.primary', backgroundColor: 'action.hover' },
         }}
         aria-label="toggle theme"
@@ -341,6 +362,46 @@ const Header = () => {
       </List>
       <Divider sx={{ my: 1 }} />
       <Box sx={{ px: 2, py: 2 }}>
+        <Box sx={{ display: 'flex', gap: 0.5, mb: 2 }}>
+          {siteData.social.github && (
+            <IconButton
+              component="a"
+              href={siteData.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+              size="small"
+              sx={{ color: 'text.secondary', border: 1, borderColor: 'divider', '&:hover': { color: 'text.primary', borderColor: 'text.secondary' } }}
+              aria-label="GitHub"
+            >
+              <GitHubIcon />
+            </IconButton>
+          )}
+          {siteData.social.linkedin && (
+            <IconButton
+              component="a"
+              href={siteData.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+              size="small"
+              sx={{ color: 'text.secondary', border: 1, borderColor: 'divider', '&:hover': { color: 'text.primary', borderColor: 'text.secondary' } }}
+              aria-label="LinkedIn"
+            >
+              <LinkedInIcon />
+            </IconButton>
+          )}
+          <IconButton
+            component="a"
+            href={`mailto:${siteData.email}`}
+            onClick={() => setMobileOpen(false)}
+            size="small"
+            sx={{ color: 'text.secondary', border: 1, borderColor: 'divider', '&:hover': { color: 'text.primary', borderColor: 'text.secondary' } }}
+            aria-label="Email"
+          >
+            <EmailIcon />
+          </IconButton>
+        </Box>
         {/* <Button
           fullWidth
           variant="contained"
@@ -419,10 +480,16 @@ const Header = () => {
             }}
             onClick={() => navigate('/')}
           /> */}
-          {/* placeholder for logo on the left */}
-          <Box sx={{ flex: 1 }} />
+          {/* Left: empty (logo placeholder) */}
 
-          <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>{desktopNav}</Box>
+          {/* left : social + theme */}
+          <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center', ml: 1 }}>
+            {desktopNavLeft}
+          </Box>
+
+          {/* right: nav links */}
+          <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>{desktopNavLinks}</Box>
+
 
           <Box sx={{ display: { xs: 'flex', sm: 'none' }, alignItems: 'center', gap: 0.5 }}>
             <IconButton
