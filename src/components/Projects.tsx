@@ -1,6 +1,7 @@
 import { Box, Typography, Grid, Paper, Chip, Link, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useNavigate } from 'react-router-dom';
 import projectsData from '../data/projects.json';
 
 interface ProjectLink {
@@ -9,6 +10,7 @@ interface ProjectLink {
 }
 
 interface Project {
+  slug: string;
   title: string;
   description: string;
   technologies: string[];
@@ -19,6 +21,7 @@ interface Project {
 const projects: Project[] = projectsData as Project[];
 
 const Projects = () => {
+  const navigate = useNavigate();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -59,6 +62,7 @@ const Projects = () => {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.15 * (index + 1), duration: 0.4 }}
               elevation={0}
+              onClick={() => navigate(`/projects/${project.slug}`)}
               sx={{
                 height: '100%',
                 display: 'flex',
@@ -70,6 +74,7 @@ const Projects = () => {
                 borderColor: 'divider',
                 overflow: 'hidden',
                 position: 'relative',
+                cursor: 'pointer',
                 transition: 'border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease',
                 '&::before': {
                   content: '""',
@@ -152,7 +157,7 @@ const Projects = () => {
                 ))}
               </Box>
               {project.links && project.links.length > 0 && (
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, mt: 'auto' }}>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, mt: 'auto' }} onClick={(e) => e.stopPropagation()}>
                   {project.links.map((link, linkIndex) => (
                     <Button
                       key={linkIndex}

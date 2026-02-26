@@ -1,5 +1,6 @@
 [
   {
+    "slug": "agent-driven-docker-executor",
     "title": "Agent-Driven Docker Executor (ADDE)",
     "description": "Go toolset + Python client for running agent-generated code in isolated Docker containers, with structured feedback for refiner agents.",
     "technologies": ["Go", "Python", "Docker", "PowerShell"],
@@ -11,6 +12,21 @@
     "links": [
       { "label": "Repo", "url": "https://github.com/harioms1522/agent-driven-docker-executer-toolkit" },
       { "label": "CLI-Binary", "url": "https://github.com/harioms1522/agent-driven-docker-executer-toolkit/releases/download/v1.1.0/adde.exe" }
+    ]
+  },
+  {
+    "slug": "k8s-quiz-game",
+    "title": "K8s Quiz Game",
+    "description": "An interactive quiz game to test and improve your Kubernetes knowledge. Built as a reusable React component package.",
+    "technologies": ["React", "TypeScript", "Material-UI"],
+    "highlights": [
+      "Interactive quiz game for Kubernetes knowledge testing",
+      "Reusable React component package published to npm",
+      "Multiple choice questions with instant feedback",
+      "Score tracking and progress monitoring"
+    ],
+    "links": [
+      { "label": "NPM Package", "url": "https://www.npmjs.com/package/@harioms1522/k8s-quiz-game" }
     ]
   }
 ]

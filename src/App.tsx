@@ -7,6 +7,7 @@ import Blog from './pages/blog/Blog';
 import BlogDetails from './pages/blog/BlogDetails';
 import BlogTag from './pages/blog/BlogTag';
 import ProjectsPage from './pages/ProjectsPage';
+import ProjectDetail from './pages/ProjectDetail';
 import { Routes, Route } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import { useEffect } from 'react';
@@ -62,6 +63,7 @@ function App() {
               <Route path="/blog/tag/:tag" element={<BlogTag />} />
               <Route path="/blog/:slug" element={<BlogDetails />} />
               <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/projects/:slug" element={<ProjectDetail />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Box>
