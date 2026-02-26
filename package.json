@@ -12,7 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@harioms1522/k8s-quiz-game": "^1.1.1",
+    "@harioms1522/k8s-quiz-game": "^1.1.2",
     "@mdx-js/react": "^3.1.0",
     "@mdx-js/rollup": "^3.1.0",
     "@mui/icons-material": "^5.15.10",
